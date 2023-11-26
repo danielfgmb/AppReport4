@@ -7,6 +7,10 @@ img{
   margin: 0 !important;
 }
 
+body{
+  /*overflow: hidden;*/
+}
+
 body, div{
   box-sizing: border-box;
   margin: 0;
@@ -24,6 +28,44 @@ body, div{
   align-items: center;
   justify-content: center;
 }
+
+.part{
+  padding: 50px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.block{
+  border-radius: 10px;
+  border: 5px solid #e4e7ff88;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.part-title{
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.question{
+  font-size: 12pt;
+  line-height: 1.8;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.text{
+  font-size: 12pt;
+  line-height: 1.8;
+  text-align: justify;
+  
+}
+
+.text-block{
+  padding: 15px;
+}
+
 
 /* styles.css */
 .phone-frame {
@@ -80,9 +122,30 @@ object-fit: contain;
     transform-style: preserve-3d;
     transform: rotateY(-18deg) rotateX(5deg); /* Adjust perspective angle */  
   }
+
+  .figspan{
+    cursor: pointer;
+    transition: all 1s ease-in;
+    background-color:#f1f3ff; 
+    box-shadow: #f4f5ff 0 0 3px;
+  }
+
+  .svg_animation{
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .img_part{
+    width: auto !important;
+    max-width: 100%;
+    height: auto !important;
+  }
   
   
   #app-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
     width: 200px; /* Adjust dimensions based on your design */
     height: 444px !important; /* Adjust dimensions based on your design */
     object-fit: contain; /* Ensure image fits inside the screen */
@@ -90,4 +153,29 @@ object-fit: contain;
     
     box-shadow: 0 0 1px #aaa inset;
   }
+  
+
+  .load_icon {
+    font-size: 100px !important;
+    color: black; /* Change color as needed */
+    animation: rotation 1s infinite linear;
+  }
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+  
+  .charging-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+
   

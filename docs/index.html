@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <title>App-Report: Tachiyomi</title>
       <meta name = "viewport" content = "width = device-width, initial-scale = 1">
       <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
       <link rel="icon" type="image/png" href="favicon/favicon.png">
       <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
       <link rel = "stylesheet" href = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+      <link rel = "stylesheet" href = "https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/css/spotlight.min.css">
+      <script src = "https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/js/spotlight.min.js"></script>
       <script src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       <link rel="stylesheet" href="styles.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
       <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-indigo.min.css" />
       <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
       <script src="script.js"></script>
+      <!--<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>-->
    </head>
 
    <body>
       <script>
-         AOS.init();
-
-
-
-        
+         //AOS.init();        
        </script>
       <div class="page" >
          <div style="position: fixed; width: 40% !important; height: 100vh; left: 60%;">
-         <div class="phone-frame">
+         <div id="phone" class="phone-frame">
             <div id="rotation" class="rotation_xd" onmouseover="random_perspective_inmediato('#rotation')">
+              
                <div class="screen">
-                  <img id="app-image" src="img/app1.jpg" alt="App Image">
+                  <div style="width: 100%; background-color: #fffcf3ff !important;height: 100%; display: flex; align-items: center; justify-content: center;">
+                     <i class="load_icon material-icons">refresh</i>
+                  </div>
+                 
+                  
+                  <img id="app-image" src="img/phone_ss/img0.jpg" alt="App Image">
                </div>
+               
                <div class="screen_upper"></div>
                <div class="screen_upper2"></div>
             </div>
@@ -39,16 +46,16 @@
 
          <div class="intro-page">
          
-            <div style="display: flex; height: 50px; align-items: center; justify-content: center;">
+            <div data-aos="fade-right" style="display: flex; height: 50px; align-items: center; justify-content: center;">
                <img src="img/logo.svg">
                <img style="margin-left: 10px;" src="img/logo_titulo.svg">
             </div>
-            <h2>App-Report 4</h2>
-            <p>Daniel F. Gómez B.</p>
-            <p>Daniel Bernal</p>
-            <p>Juan Pablo Martinez Pineda</p>
+            <h2 data-aos="fade-right">App-Report</h2>
+            <p data-aos="fade-right">Daniel Fernando Gómez-Barrera</p>
+            <p data-aos="fade-right">Daniel Bernal</p>
+            <p data-aos="fade-right">Juan Pablo Martinez Pineda</p>
             <div>
-            <button id="tt5" style="margin: 15px; margin-right: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+            <button id="tt5" onclick="startPresentation()" style="margin: 15px; margin-right: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
                <i class="material-icons">arrow_right</i>
              </button>
              <div class="mdl-tooltip" for="tt5">
@@ -63,16 +70,420 @@
                </div>
              </div>
          </div>
-         <!--<div class="intro-page">
-            xd
-         </div>-->       
+         <!--PART 1-->
+         <div class="part" id="page1">
+
+            <h2 class="part-title" data-aos="fade-right">Part 1</h2>
+            <div class="text-block" data-aos="fade-right">
+            <p class="question">Describe the app you chose thoroughly. What is/are its core functionalities? What do you think is their revenue model? How many downloads does it have? What do you find interesting about it?</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Core Functionalities</h3>
+            <div class="text-block" data-aos="fade-right">
+            <p class="text">Tachayomi is a highly customizable manga reader. To find the application's main functionalities, we downloaded it from UpToDown app store (https://tachiyomi.en.uptodown.com/android/download). Currently it is not available in the official android store (Google Play). We navigated for the different views of the application, and extensively reviewed the User Guide (available at https://tachiyomi.org/).</p>
+            </div>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">The core functionalities are the following (this are explicitly publicized in the front page):</p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <p class="text">
+                     <b>Extensions:</b> <span onclick="overrideFigure(1)" id="fig1span" class="figspan">To use this feature, we accessed to the browsing option in tab bar where the user can access to the different sources of manga (Figure 1.a).</span> In the contextual menu there is an option called “Extensions”, in this section there are different providers of manga.<br><br>
+
+                  We tested with some of them, in order to install these extensions Tachayomi installs another app in the device per extension (to get it work we need to give installing permissions to Tachayomi, which bring us security concerns). After installing it,  <span onclick="overrideFigure(2)" id="fig2span" class="figspan">the extension library could be accessed through the source view (as shown in Figure 1.b).</span> <span onclick="overrideFigure(3)" id="fig3span" class="figspan">When an extension source is selected the app opens the extension library with all the manga available for this extension (Figure 1.c).</span>
+                </p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div>
+                  <p class="text">
+                        <b>Tracking:</b> Tachiyomi allows integration with supported trackers. Such as MyAnimeList, Anilist, MangaUpdates and others. These trackers allow the user to follow the progress of the reading, set time goals of finishing, show reviews, etc. For configuring a tracker, we followed the instructions of the user guide. To test the functionality, we created a user in Anilist, and linked it in Tachiyomi (<span onclick="overrideFigure(4)" id="fig4span" class="figspan">Figure 2.a</span>, <span onclick="overrideFigure(5)" id="fig5span" class="figspan">2.b</span>). In each manga it is needed to <span onclick="overrideFigure(6)" id="fig6span" class="figspan">select the tracker and relate the manga with one in the Anilist database</span>. After that automatically after reading a chapter Tachiyomi updates the progress in Anilist (Figure 2.d).
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part1/nfig1.png" data-description="Fig 2. d) Anilist webapp (shows tracking of manga in Tachiyomi)">
+                        <img class="img_part" src="img/part1/nfig1.png">
+                     </a>
+                     <p>Fig 2. d) Anilist webapp (shows tracking of manga in Tachiyomi)</p>
+                  </div>
+              </div>
+            </div>
+
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <p class="text">
+                     <b>Customization:</b> Probably this is the most interesting feature: Tachiyomi is highly configurable for reading. <span onclick="overrideFigure(7)" id="fig7span" class="figspan">When reading a manga Tachiyomi show a tab bar with four buttons, the first is to change the change of page gesture (left to right, vertical, etc)</span>, the second is to crop the image (usually manga have big margins in blank, so Tachiyomi cropped it to show only filled content), rotation mode (free, fixed portait, fixed land scaped) and the last button is for another configurations.<br><br>
+                     As shown in <span onclick="overrideFigure(8)" id="fig8span" class="figspan">Figure 2.b</span> and <span onclick="overrideFigure(9)" id="fig9span" class="figspan">3.c</span> Tachiyomi allows the user from changing behavior when tapping, to adjusting color filters for an enhanced reading experience. Although there are many possible choices, the most common preferences, also available in other readers, were directly accessible from the tab bar making it simple for the reader not interested in setting many options.
+               </p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  add_circle
+               </span>
+               <div data-aos="fade-right" >
+               <p class="text">
+                     <b>Other functionalities (not core):</b>  
+               </p>
+               <ul data-aos="fade-right">
+                  <li class="text">Source migration: Time to time sources become no longer accessible. In order to no lose any progress Tachiyomi allows the user to migrate the preferences and progress to another source that had the same manga.</li>
+                  <li class="text">Backups: When changing devices or to prevent loss of information Tachiyomi has a backup feature, that let the user recover titles, categories, read chapters, tracking settings, reading history and manga information in case of failing.</li>
+                  <li class="text">Categories: To organize the different manga stored in Tachiyomi, the user can create categories and classify his manga according to his preferences.</li>
+                  <li class="text">Dark mode: Tachiyomi supports night/dark mode, the device in which we tested the different functionalities was configured in dark mode. Tachiyomi get automatically this setting of the system and set the app in dark mode. In the Figures 1, 2 and 3 is shown how the dark mode displays on the device.</li>
+               </ul>
+               </div>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Revenue model</h3>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi is an open-source manga application, and so, it does not have traditional revenue model like the commercial applications. Instead, Tachiyomi is maintained by volunteers and available to user for free.</p>
+            </div>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Taking into account Tachiyomi's lack of a revenue model, it relies on donations and contributions from its user community to cover for hosting costs, support ongoing development and ensure the availability of manga sources.</p>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Downloads and Store Availability</h3>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <p class="text">As said before Tachiyomi is not available in the official app stores for most of the Android devices: Google Play, Huawei App Gallery, and other device-integrated stores. Nevertheless, Tachiyomi is offered in UpToDown (Figure 4). This app store is completely open and does not have any location restrictions nor subscription costs for uploading apps. At this app store there have been reported more than 2.7 million downloads for Tachiyomi. However, Tachiyomi allows downloads of their APK directly from the official webpage, so the number of total downloads is probably much higher than 2.7 million.</p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part1/nfig2.png" data-description="Figure 4. Tachiyomi in UpToDown app store">
+                     <img class="img_part" src="img/part1/nfig2.png">
+                  </a>
+                  <p>Figure 4. Tachiyomi in UpToDown app store</p>
+               </div>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Interesting Facts</h3>
+
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <p class="text">Tachiyomi is completely open-source and community made, everyone can make a pull request to modify the source code. Originally was created by developers in their “free time”.</p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <p class="text">Using this application, we were amazed of the nice UX. Very usable, following the modern android guidelines and using the latest version (introduced with Android 12) of Google's open source designing library: Material 3.</p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <p class="text">Stated in their webpage the do not have interest to be in Google Play Store nor extend availability for iOS devices.</p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <p class="text">One of the main reasons to use Tachiyomi: is a free-ad application. That may seem normal due to the type of app (free, open source, etc.), but the amazing fact is the sources available in Tachiyomi have ads. If you go directly through their pages, you can read the manga but with many ads included. One of the main objectives of the developers were avoid this, so the extensions extract the manga without the publicity.</p>
+            </div>
+            <div class="text-block"  data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <p class="text">When users download the app, it requests certain permissions, <span onclick="overrideFigure(10)" id="fig10span" class="figspan">including access to photos, media, and files stored on the device.</span> Additionally, the app <span onclick="overrideFigure(11)" id="fig11span" class="figspan">asks for permission to install unknown apps</span>, particularly for the various extensions the app utilizes.</p>
+            </div>
+            
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Describe the repo of the app. In this description you should at least describe: What languages do they use? How many commits does it have? How many lines of code? Think about forks, branches, etc. Think about each important component of the repository and describe it</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <p class="text">Browsing the GitHub repository that was publicly shared by the development team on the official website (https://github.com/tachiyomiorg/tachiyomi/tree/master), we can access pertinent information about the entire app for analysis.</p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part1/nfig3.png" data-description="Figure 7. Tachiyomi’s releases.">
+                     <img class="img_part" src="img/part1/nfig3.png">
+                  </a>
+                  <p>Figure 7. Tachiyomi’s releases</p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In alignment with Figure 7, the developers have indicated that the most recent stable release of the application is version 0.14.6. Remarkably, this release marks the 75th iteration and was published on April 16, 2023. It's noteworthy that this version is designed to be compatible with Android devices running Android 6.0 (Marshmallow) or higher.</p>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Languages of use</h3>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <p class="text">With a remarkable 100% utilization of Kotlin, it's evident that Kotlin is the exclusive and predominant programming language used for developing the Android app in Tachiyomi.</p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part1/nfig4.jpg" data-description="Figure 8. Tachiyomi’s programming languages for the Android app">
+                     <img class="img_part" src="img/part1/nfig4.jpg">
+                  </a>
+                  <p>Figure 8. Tachiyomi’s programming languages for the Android app</p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">While Kotlin plays a central role in the development of the Android application, it's essential to acknowledge the use of other programming languages within the broader project scope. These languages come into play for various purposes, including website development, image decoding processes, and the extraction of information from Tachiyomi's extensions.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Commits</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">As of the date of this report, the repository boasts an impressive tally of 6,035 commits exclusively within the main branch, which is the only branch observable. Furthermore, the last stable release showed 16 commits, involving modifications to 24 files, and contributions from 3 distinct collaborators. Please refer to Figure 7 for more details about the release.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Lines of Code</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <p class="text">The total number of lines of code was obtained through 2 methods. The first one was using a Google Chrome extension called GithubGloc, this extension allows anyone to see the estimated amount of code in the whole repository. For Tachiyomi, GithubGloc found an approximate of 161,000 lines of code.</p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part1/nfig5.png" data-description="Figure 9. Approximate lines of code using GithubGloc">
+                     <img class="img_part" src="img/part1/nfig5.png">
+                  </a>
+                  <p>Figure 9. Approximate lines of code using GithubGloc</p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <p class="text">The second method was able to calculate a more precise number of the total lines. Using the git command git ls-files | xargs wc –l in the Git Bash of a fork of the repository, the terminal showed three subtotals that sum up to the total number of 163,589 lines of code, which is close to the estimation computed by the GithubGloc extension.</p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part1/nfig6.png" data-description="Figure 10. Subtotals of computed lines of code using Git Bash">
+                     <img class="img_part" src="img/part1/nfig6.png">
+                  </a>
+                  <a class="spotlight" href="img/part1/nfig7.png" data-description="Figure 10. Subtotals of computed lines of code using Git Bash">
+                     <img class="img_part" src="img/part1/nfig7.png">
+                  </a>
+                  <a class="spotlight" href="img/part1/nfig8.png" data-description="¿Figure 10. Subtotals of computed lines of code using Git Bash">
+                     <img class="img_part" src="img/part1/nfig8.png">
+                  </a>
+                  <p>Figures 10, 11, 12. Subtotals of computed lines of code using Git Bash</p>
+               </div>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Important Components</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">It's worth noting that the Tachiyomi repository has garnered significant community involvement, with nearly 600 contributors actively participating in the development and collaboration on the platform.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Regarding language availability, the development team has undertaken the ambitious task of translating the app into 80 languages. Impressively, they have achieved 73% of this extensive translation goal.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Furthermore, Tachiyomi boasts over 24,000 stars, indicative of its popularity among users and developers alike. Additionally, more than 2,600 individuals have forked the code to work on their own variations or contribute to the project.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The app's inception traces back to its first official stable release on January 16, 2016, with version 0.1.0. Since then, it has seen a total of 75 official releases. To enhance user engagement and testing of new features, developers also provide a "preview version" for users to explore ahead of the next stable release.</p>
+            </div>
+
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Identify in this app at least 2 business questions type 2, and 1 business questions type 4 or 5.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Busisness Questions Type 2</h3>
+            <div class="text-block block" data-aos="fade-right" >
+                  <h5  class="part-title">Question 1: Which mangas has the user recently viewed?</h5>
+                  <div class="text-block" data-aos="fade-right" ><p class="text">
+                     <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Description of a possible data source:</b>
+                        Tachiyomi utilizes the "history.sq" data source to meticulously track user manga views. This history repository meticulously records vital information, including the manga's unique identifier, the date of access, and the time spent by the user on manga reading sessions. Subsequently, developers harness the date information to seamlessly arrange the user's reading history in a chronologically descending order, from the most recent manga read to the oldest. 
+                  </p></div>
+                  <div class="text-block" data-aos="fade-right" ><p class="text">
+                     <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Describe/Show how the data is displayed:</b>
+                     <span onclick="overrideFigure(12)" id="fig12span" class="figspan">Tachiyomi presents this information within the "History" section, accessible via a navigation bar button. Within this section, the app displays the manga titles that the user has read with their cover image, the current chapter, and
+                     the timestamp of the last reading.</span> Furthermore, users have the option to clear all their reading history with a single button press or to delete one specific. It's worth mentioning that the app arranges the manga entries in chronological descending order, creating a dedicated space for users to easily locate their recently viewed mangas.
+                  </p></div>
+            </div>
+
+            <div class="text-block block" data-aos="fade-right" >
+               <h5  class="part-title">Question 2: What are the various reading modes available to users when reading manga?</h5>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Description of a possible data source:</b>
+                  Tachiyomi utilizes the Android's SharedPreferences system which stores the app-specific user preferences and settings. This works the following way:</p>
+                  <ul>
+                     <li class="text">Everytime the user opens Tachiyomi the app initializes SharedPreferences to manage the settings.</li>
+                     <li class="text">Users acces the settings screen or menu, when in this scenario selects one particular reading mode.</li>
+                     <li class="text">When this happens, the app updates the corresponding SharedPreferences key-value pair to reflect the new value.</li>
+                     <li class="text">Whenever the app needs to use a user's preference, it retrieves the value from the SharedPreferences.</li>
+                  </ul>
+                  <p class="text">It's worth mentioning that SharedPreferences allows the developers to define a default value if a user has never manually configured a particular setting. Additionally, these SharedPreferences are designed to persist between app sessions, meaning that the user preferences will stay intact even if the user closes the app.
+               </p></div>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Describe/Show how the data is displayed:</b>
+                  The data is an enumeration with various possible values, depending on the user's preferences. This enumeration is displayed in different screens and sections of the app.
+                  <ul>
+                     <li class="text"><span onclick="overrideFigure(13)" id="fig13span" class="figspan">In the manga reading screen, the buttons below provide the user with different options to customize their reading mode. If the user taps the bottom-left button, the app displays the enumeration for the user.</span></li>
+                     <li class="text"><span onclick="overrideFigure(14)" id="fig14span" class="figspan">In the manga reading screen, the buttons below offer the user various ways to customize their reading mode. If the user taps the bottom-right button, the settings will appear, and they can navigate to the "Reading mode" section to make modifications.</span></li>
+                     <li class="text"><span onclick="overrideFigure(15)" id="fig15span" class="figspan">Alternatively, users can access the settings by tapping the settings button in the main menu, then navigating to the Reader section and selecting the "Default reading mode" option.</span></li>
+                  </ul>
+               </p></div>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Busisness Questions Type 5</h3>
+
+            <div class="text-block block" data-aos="fade-right" >
+               <h5  class="part-title">Question 1: What are the most used extensions of the marketplace?</h5>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Description of a possible data source:</b>
+                  <span onclick="overrideFigure(16)" id="fig16span" class="figspan">
+                  Tachiyomi makes use of the "sources.sq" data source to store downloaded manga extensions that each user has obtained. Given this, developers just need to merge all the tables, aggregating the count of each manga extension, and subsequently sorting the results in descending order of
+                  frequency. It’s worth noting that merely by modifying the sorting criteria, developers could also know the least used extensions.<br><br>
+                  Furthermore, within the "manga.sq" data source, there exists a timestamp for the duration a user spent reading manga from each extension. By employing appropriate joins, developers can construct a query that considers the reading time allocated by each user for every extension, thereby approaching a more accurate result for the following question.</span>
+               </p></div>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Benefits for the Business/App:</b>
+                  This question holds significant value for the Tachiyomi app, primarily due to its community-driven model. In Tachiyomi, several extensions are either maintained or financially supported by the community.<br><br>
+By analyzing each extension usage data, the developers can make informed decisions regarding extensions that receive little to no utilization. This data-driven approach enables them to optimize their efforts and resources by focusing on more commonly used sources.<br><br>
+Furthermore, if the least-used extensions involve financial costs, identifying and discontinuing them can result in cost savings for the developers. Therefore, this analysis not only streamlines the user experience but also ensures the efficient allocation of resources within the app's ecosystem.<br><br>
+Furthermore, developers have the opportunity to enhance the "sources" and "extensions" views. They can implement features that recommend the most popular extensions, making it easier for users to discover and utilize them. Simultaneously, efforts can be directed towards increasing the visibility of lesser-used extensions, aiding their recognition and potentially encouraging more users to explore and benefit from them.<br>
+               </p></div>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Busisness Questions Type 4</h3>
+
+            <div class="text-block block" data-aos="fade-right" >
+               <h5  class="part-title">Question 1: What have been the 10 most popular manga in the last year?</h5>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Description of a possible data source:</b>
+                  Tachiyomi can effectively utilize the "mangas.sq" data source to address this inquiry. By performing comprehensive table joins and analyzing user engagement metrics, such as the most frequently viewed and time-spent manga, valuable insights can be extracted. This data not only holds significant relevance for various companies but is also invaluable for Tachiyomi itself.</p></div>
+               <div class="text-block" data-aos="fade-right" ><p class="text">
+                  <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Benefits for the Business/App:</b>
+                  TThe data related to the 10 most popular manga can be a profit source for the Tachiyomi revenue model, since it can be sold to manga editorials located in various countries nowadays. </p></div>
+            </div>
+
+            <h3 class="part-title" data-aos="fade-right">Relevant Links</h3>
+            <div class="text-block" data-aos="fade-right" >
+            <a  class="text"  href="https://github.com/tachiyomiorg/tachiyomi/blob/master/app/src/main/java/eu/kanade/tachiyomi/App.kt">App.kt File</a><br>
+            <a  class="text"  href="https://github.com/tachiyomiorg/tachiyomi/blob/3cd3f45c8a47790edb3dd687942dd1539efe27c7/domain/src/main/java/tachiyomi/domain/history/model/History.kt#L2">History.kt File</a><br>
+            <a  class="text" href="https://github.com/tachiyomiorg/tachiyomi/blob/3cd3f45c8a47790edb3dd687942dd1539efe27c7/app/src/main/java/eu/kanade/tachiyomi/ui/reader/setting/ReadingModeType.kt">ReadingModeType.kt File</a><br>
+            <a  class="text"  href="https://github.com/tachiyomiorg/tachiyomi/blob/3cd3f45c8a47790edb3dd687942dd1539efe27c7/data/src/main/sqldelight/tachiyomi/data/history.sq">history.sq File</a>
+            </div>
+         </div>   
+         
+         
       </div>
+      
+      <svg class="svg-animation" id="lineContainer" style="z-index: -98; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;"></svg>
       <div id="back_ball" style="z-index: -99; position: fixed;width: 180vh;height: 150vh; bottom: -50vh;right: -50vh;background: radial-gradient(closest-side,#b3bafa, #fff);">
       </div>
       <script>
          const showing = false
           animation_xd('#back_ball');
          random_perspective('#rotation');
+
+         const svgNS = "http://www.w3.org/2000/svg";
+         const line = document.createElementNS(svgNS, 'line');
+         const circle = document.createElementNS(svgNS, 'circle');
+         line.setAttribute('stroke', 'black');
+         lineContainer.appendChild(line);
+         circle.setAttribute('r', 2);
+         lineContainer.appendChild(circle);
+
+const cant_figs = 16
+         
+$(function () {
+  $(window).scroll(function () {
+
+      let height_middle = window.innerHeight/2;
+      var scroll_position = $(window).scrollTop();
+      var selected = false;
+      let i = cant_figs;
+      for(i=cant_figs; i>0; i--){
+         console.log('#fig'+i+'span',cant_figs,i)
+         var rect = $('#fig'+i+'span').position();
+         console.log(rect.top,"<",height_middle+scroll_position)
+         if (rect.top < height_middle+scroll_position && rect.top > scroll_position){
+            selected=true;
+            highlightText(i)
+            updateLine(i)
+            updateImage(i)
+            break;
+         }
+         
+      }
+
+      if(!selected){
+            hideLine()
+            updateImage(0)
+         }
+      for(let j=0; j<=cant_figs; j++){
+         if( j!=i){
+            unHighlightText(j)
+         }
+      }
+   
+      
+      
+      
+
+      
+      
+  });
+});
+
+function highlightText(i){
+   $('#fig'+i+'span').css(
+               'background-color','#b3bafa'
+            ).css(
+               'box-shadow', '#b3bafa 0 0 3px'
+            )
+}
+
+function unHighlightText(i){
+   $('#fig'+i+'span').css(
+               'background-color','#f1f3ff'
+            ).css(
+               'box-shadow', '#f4f5ff 0 0 3px'
+            )
+}
+
+var image_i=0
+
+function hideLine() {
+   const stationaryElement = document.getElementById('phone');
+    const stationaryRect = stationaryElement.getBoundingClientRect();
+    const stationaryX = stationaryRect.left + (stationaryRect.width / 2);
+    const stationaryY = stationaryRect.top + (stationaryRect.height / 2);
+    line.setAttribute('x2', stationaryX);
+    line.setAttribute('y2', stationaryY);
+    line.setAttribute('x1', stationaryX);
+    line.setAttribute('y1', stationaryY);
+    circle.setAttribute('cx', stationaryX);
+    circle.setAttribute('cy', stationaryY);
+  }
+
+function updateImage(i){
+   
+   if(image_i!=i){
+      image_i = i
+      var image = $("#app-image");
+      image.fadeOut('fast', function () {
+         image.attr('src', 'img/phone_ss/img'+i+'.jpg');
+         image.fadeIn('fast');
+      });
+   }
+}
+
+function overrideFigure(i){
+   updateImage(i)
+   updateLine(i)
+   highlightText(i)
+   for(let j=0; j<=cant_figs; j++){
+         if( j!=i){
+            unHighlightText(j)
+         }
+   }
+}
+
+function updateLine(i) {
+   let movingElementId = 'fig'+i+'span'
+   const stationaryElement = document.getElementById('phone');
+   const movingElement = document.getElementById(movingElementId);
+   const referenceX = document.getElementById('page1');
+   const referenceXRect = referenceX.getBoundingClientRect();
+    const stationaryRect = stationaryElement.getBoundingClientRect();
+    const movingRect = movingElement.getBoundingClientRect();
+
+    const stationaryX = stationaryRect.left + (stationaryRect.width / 2);
+    const stationaryY = stationaryRect.top + (stationaryRect.height / 2);
+
+    const movingX = referenceXRect.left + referenceXRect.width -40;
+    const movingY = movingRect.top + movingRect.height / 2 +10;
+
+    line.setAttribute('x2', stationaryX);
+    line.setAttribute('y2', stationaryY);
+    line.setAttribute('x1', movingX);
+    line.setAttribute('y1', movingY);
+    circle.setAttribute('cx', movingX);
+    circle.setAttribute('cy', movingY);
+  }
       </script>
       </div>
        

@@ -17,17 +17,18 @@ button.addEventListener('click', function() {
 
 
 function animation_xd($e, xd = true){
+  //AOS.refresh();
   if(xd){
-    console.log("entre1")
+    //console.log("entre1")
     
     $($e).animate({
       width: '100vh', // New width
       height: '100vh', // New height
-    }, 3000, function () { console.log("entre_Dentro"); animation_xd($e, false) }); // Animation duration in milliseconds (1000ms = 1 second)
+    }, 3000, function () {  animation_xd($e, false) }); // Animation duration in milliseconds (1000ms = 1 second)
   
   }
   else{
-    console.log("entre2")
+    //console.log("entre2")
     $($e).animate({
       width: '180vh', // New width
       height: '140vh', // New height
@@ -47,7 +48,7 @@ function random_perspective($e){
     if(!showing){
       var numberInRange25 = getRandomNumber(-30, 30);
       var numberInRange8 = getRandomNumber(-8, 8);
-      console.log("rp",numberInRange25,numberInRange8)
+      //console.log("rp",numberInRange25,numberInRange8)
     $($e).delay(20000)
     .css("transform", 'rotateY('+numberInRange25+'deg) rotateX('+numberInRange8+'deg)')
     .animate({
@@ -64,6 +65,21 @@ function random_perspective_inmediato($e){
   $($e).css("transform", 'rotateY('+numberInRange25+'deg) rotateX('+numberInRange8+'deg)')
 }
 }
+
+function startPresentation(){
+  console.log("startPres")
+  $('body').css(
+    "overflow-y","scroll")
+  scrollToAnchor('#page1')
+  
+}
+
+function scrollToAnchor(aid){
+  $('html, body').animate({
+      scrollTop: $(aid).offset().top
+  }, 2000);
+}
+
 
 
 
