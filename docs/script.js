@@ -61,8 +61,10 @@ function random_perspective_inmediato($e){
   if(!showing){
     var numberInRange25 = getRandomNumber(-30, 30);
     var numberInRange8 = getRandomNumber(-8, 8);
+    
     console.log("rp",numberInRange25,numberInRange8)
-  $($e).css("transform", 'rotateY('+numberInRange25+'deg) rotateX('+numberInRange8+'deg)')
+  $($e).css("transform", 'rotateY('+numberInRange25+'deg) rotateX('+numberInRange8+'deg)'); // Animation duration in milliseconds (1000ms = 1 second)
+
 }
 }
 

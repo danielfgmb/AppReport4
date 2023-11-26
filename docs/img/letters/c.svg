@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="45.705986mm"
+   height="45.705986mm"
+   viewBox="0 0 45.705986 45.705986"
+   version="1.1"
+   id="svg2857"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="c.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2859"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.74386223"
+     inkscape:cx="125.02315"
+     inkscape:cy="29.575369"
+     inkscape:window-width="1920"
+     inkscape:window-height="974"
+     inkscape:window-x="1909"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2854" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-71.582348,-140.58593)">
+    <circle
+       style="fill:#aa00ff;fill-opacity:1;stroke-width:0.449792;stroke-linecap:round;stroke-miterlimit:1.9;paint-order:markers stroke fill"
+       id="path246-6-4"
+       cx="94.435341"
+       cy="163.43892"
+       r="22.852993" />
+    <text
+       xml:space="preserve"
+       style="font-size:35.2778px;font-family:Consolas;-inkscape-font-specification:Consolas;fill:#00bfa5;fill-opacity:1;stroke-width:0.449792;stroke-linecap:round;stroke-miterlimit:1.9;paint-order:markers stroke fill"
+       x="82.013023"
+       y="175.7896"
+       id="text1115-9-6"><tspan
+         sodipodi:role="line"
+         id="tspan1113-4-2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2778px;font-family:'Leelawadee UI';-inkscape-font-specification:'Leelawadee UI';fill:#ffffff;fill-opacity:1;stroke-width:0.449792"
+         x="82.013023"
+         y="175.7896">C</tspan></text>
+  </g>
+</svg>

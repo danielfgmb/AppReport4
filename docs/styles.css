@@ -11,6 +11,8 @@ body{
   /*overflow: hidden;*/
 }
 
+
+
 body, div{
   box-sizing: border-box;
   margin: 0;
@@ -29,9 +31,25 @@ body, div{
   justify-content: center;
 }
 
+.end-page{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .part{
   padding: 50px;
   width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.part_4{
+  padding: 50px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -117,6 +135,47 @@ object-fit: contain;
     border-top-left-radius: 20px 20px;
     box-shadow: 0 0 5px #aaa inset;
   }
+
+  .screen2 {
+    position: relative;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 442px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.353); /* Simulate phone shadow */
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    border-top: 17px solid whitesmoke;
+    border-bottom: 17px solid whitesmoke;
+    border-left:  8px solid whitesmoke;
+    border-right: 8px solid whitesmoke;
+    background-color: whitesmoke;
+    
+  }
+
+  .screen2_upper {
+    position: absolute;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 442px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    border-top: 17px solid whitesmoke;
+    border-bottom: 17px solid whitesmoke;
+    border-left:  8px solid whitesmoke;
+    border-right: 8px solid whitesmoke;
+  }
+  .screen2_upper2 {
+    position: absolute;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 442px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    box-shadow: 0 0 5px #aaa inset;
+  }
   .rotation_xd{
     transition: all 1s ease-in;
     transform-style: preserve-3d;
@@ -134,10 +193,33 @@ object-fit: contain;
     transition: transform 0.5s ease-in-out;
   }
 
+  .vid_part_4{
+    width: 60% !important;
+    height: 500px;
+  }
+
+  .img_part_4{
+    width: auto !important;
+    max-width: 70%;
+    text-align: center;
+    height: auto !important;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px gray;
+  }
+
   .img_part{
     width: auto !important;
     max-width: 100%;
     height: auto !important;
+    border-radius: 3px;
+  }
+
+  .img_part_shadow{
+    width: auto !important;
+    max-width: 100%;
+    height: auto !important;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px gray;
   }
   
   
@@ -148,6 +230,19 @@ object-fit: contain;
     z-index: 999;
     width: 200px; /* Adjust dimensions based on your design */
     height: 444px !important; /* Adjust dimensions based on your design */
+    object-fit: contain; /* Ensure image fits inside the screen */
+    border-radius: 10px;;
+    
+    box-shadow: 0 0 1px #aaa inset;
+  }
+
+  #app-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 200px; /* Adjust dimensions based on your design */
+    height: 408px !important; /* Adjust dimensions based on your design */
     object-fit: contain; /* Ensure image fits inside the screen */
     border-radius: 10px;;
     
@@ -175,6 +270,10 @@ object-fit: contain;
     justify-content: center;
     align-items: center;
     height: 100vh;
+  }
+  ul{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   
 

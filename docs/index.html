@@ -16,35 +16,139 @@
       <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-indigo.min.css" />
       <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
       <script src="script.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>-->
       <!--<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>-->
    </head>
 
    <body>
       <script>
-         //AOS.init();        
+         //AOS.init();     
+
        </script>
       <div class="page" >
-         <div style="position: fixed; width: 40% !important; height: 100vh; left: 60%;">
-         <div id="phone" class="phone-frame">
-            <div id="rotation" class="rotation_xd" onmouseover="random_perspective_inmediato('#rotation')">
-              
-               <div class="screen">
-                  <div style="width: 100%; background-color: #fffcf3ff !important;height: 100%; display: flex; align-items: center; justify-content: center;">
-                     <i class="load_icon material-icons">refresh</i>
-                  </div>
-                 
-                  
-                  <img id="app-image" src="img/phone_ss/img0.jpg" alt="App Image">
-               </div>
+         <!--NAVIGATOR-->
+         <style>
+            .navigator{
+               position: fixed;
+               bottom: 15px;
+               left: 50%;
+               display: flex;
+               transform: translate(-50%, 0%)
+            }
+
+            
+
+            .navigator_inside{
+               overflow: auto;
+               background: white;
+               align-items: center;
+               box-shadow: 0px 0px 10px rgba(109, 109, 109, 0.276);
+               border-radius: 20px 20px 20px 20px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 35px;
+               padding-left: 15px;
+               padding-right: 15px;
+               background: white;
+               color: black;
+               transition: all .5s;
+               cursor: pointer;
+            }
+
+            .navigator_inside:hover{
+               background: black;
+               color: white;
+            }
+
+            .ball_button{
+               height: 35px;
+               width: 35px;
+               box-shadow: 0px 0px 10px rgba(109, 109, 109, 0.276);
+               border-radius: 20px 20px 20px 20px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               background: white;
+               color: black;
+               transition: all .5s;
+               cursor: pointer;
+            }
+
+            .ball_button:hover{
+               background: black;
+               color: white;
+            }
+
+
+            .h_separator{
+               width: 10px;
+            }
+            
+         </style>
+         <div class="navigator" id="navigator" style="z-index: 999999999; display: none;">
+            <div class="ball_button" onclick="goBack()"><span class="material-symbols-outlined">
+               arrow_back
+               </span></div>
+            <div class="h_separator"></div>
+            <div class="navigator_inside" onclick="goToMe()">
+               <p  id="navigator_text" style="white-space: nowrap; font-size: 15px;"><b>Part 1:</b> App Overview</p>
+            </div>
+            <div class="h_separator"></div>
+            <div class="ball_button" onclick="goNext()"><span class="material-symbols-outlined">
+               arrow_forward
+               </span></div>
+         </div>
+         <!--PHONE 1-->
+         <div id="fixed1" style="position: fixed; width: 40% !important; height: 100vh; left: 60%; z-index: 9999;">
+            <div id="phone" class="phone-frame">
+               <div id="rotation" class="rotation_xd" onmouseover="random_perspective_inmediato('#rotation')">
                
-               <div class="screen_upper"></div>
-               <div class="screen_upper2"></div>
+                  <div class="screen">
+                     <div style="width: 100%; background-color: #fffcf3ff !important;height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <i class="load_icon material-icons">refresh</i>
+                     </div>
+                  
+                     
+                     <img id="app-image" src="img/phone_ss/img0.jpg" alt="App Image">
+                  </div>
+                  
+                  <div class="screen_upper"></div>
+                  <div class="screen_upper2"></div>
+               </div>
             </div>
          </div>
-      </div>
+         <!--END PHONE 1-->
+         <!--PHONE-2-->
+         <div id="fixed2" style="display: none; position: fixed; width: 40% !important; height: 100vh; left: 60%; z-index: 998;">
+            <div id="phone2" class="phone-frame" >
+               <div id="rotation2" class="rotation_xd">
+               
+                  <div class="screen2">
+                     <div style="width: 100%; background-color: #fffcf3ff !important;height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <i class="load_icon material-icons">refresh</i>
+                     </div>
+                     
+                     
+                     <video id="app-video" src="img/phone_ss/img0.jpg" alt="App Image" muted autoplay loop>
+                  </div>
+                  
+                  <div class="screen2_upper"></div>
+                  <div class="screen2_upper2"></div>
+               </div>
+            </div>
+         </div>
+         <!--END PHONE2-->
 
-         <div class="intro-page">
+
+
+
+         <div class="intro-page" id="intro-page">
          
             <div data-aos="fade-right" style="display: flex; height: 50px; align-items: center; justify-content: center;">
                <img src="img/logo.svg">
@@ -52,8 +156,7 @@
             </div>
             <h2 data-aos="fade-right">App-Report</h2>
             <p data-aos="fade-right">Daniel Fernando Gómez-Barrera</p>
-            <p data-aos="fade-right">Daniel Bernal</p>
-            <p data-aos="fade-right">Juan Pablo Martinez Pineda</p>
+            <p data-aos="fade-right">Daniel Andrés Bernal Cáceres</p>
             <div>
             <button id="tt5" onclick="startPresentation()" style="margin: 15px; margin-right: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
                <i class="material-icons">arrow_right</i>
@@ -74,6 +177,7 @@
          <div class="part" id="page1">
 
             <h2 class="part-title" data-aos="fade-right">Part 1</h2>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 23-Sep-2023 (Feedback revisions completed)</i></h7>
             <div class="text-block" data-aos="fade-right">
             <p class="question">Describe the app you chose thoroughly. What is/are its core functionalities? What do you think is their revenue model? How many downloads does it have? What do you find interesting about it?</p>
             </div>
@@ -88,7 +192,7 @@
                <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
                   counter_1
                </span>
-               <p class="text">
+               <p class="text" style="width: 100%">
                      <b>Extensions:</b> <span onclick="overrideFigure(1)" id="fig1span" class="figspan">To use this feature, we accessed to the browsing option in tab bar where the user can access to the different sources of manga (Figure 1.a).</span> In the contextual menu there is an option called “Extensions”, in this section there are different providers of manga.<br><br>
 
                   We tested with some of them, in order to install these extensions Tachayomi installs another app in the device per extension (to get it work we need to give installing permissions to Tachayomi, which bring us security concerns). After installing it,  <span onclick="overrideFigure(2)" id="fig2span" class="figspan">the extension library could be accessed through the source view (as shown in Figure 1.b).</span> <span onclick="overrideFigure(3)" id="fig3span" class="figspan">When an extension source is selected the app opens the extension library with all the manga available for this extension (Figure 1.c).</span>
@@ -98,7 +202,7 @@
                <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
                   counter_2
                </span>
-               <div>
+               <div style="width: 100%">
                   <p class="text">
                         <b>Tracking:</b> Tachiyomi allows integration with supported trackers. Such as MyAnimeList, Anilist, MangaUpdates and others. These trackers allow the user to follow the progress of the reading, set time goals of finishing, show reviews, etc. For configuring a tracker, we followed the instructions of the user guide. To test the functionality, we created a user in Anilist, and linked it in Tachiyomi (<span onclick="overrideFigure(4)" id="fig4span" class="figspan">Figure 2.a</span>, <span onclick="overrideFigure(5)" id="fig5span" class="figspan">2.b</span>). In each manga it is needed to <span onclick="overrideFigure(6)" id="fig6span" class="figspan">select the tracker and relate the manga with one in the Anilist database</span>. After that automatically after reading a chapter Tachiyomi updates the progress in Anilist (Figure 2.d).
                   </p>
@@ -320,9 +424,9 @@
                <div class="text-block" data-aos="fade-right" ><p class="text">
                   <span class="material-symbols-outlined" style="font-size: 10pt;">arrow_right_alt</span> <b>Benefits for the Business/App:</b>
                   This question holds significant value for the Tachiyomi app, primarily due to its community-driven model. In Tachiyomi, several extensions are either maintained or financially supported by the community.<br><br>
-By analyzing each extension usage data, the developers can make informed decisions regarding extensions that receive little to no utilization. This data-driven approach enables them to optimize their efforts and resources by focusing on more commonly used sources.<br><br>
-Furthermore, if the least-used extensions involve financial costs, identifying and discontinuing them can result in cost savings for the developers. Therefore, this analysis not only streamlines the user experience but also ensures the efficient allocation of resources within the app's ecosystem.<br><br>
-Furthermore, developers have the opportunity to enhance the "sources" and "extensions" views. They can implement features that recommend the most popular extensions, making it easier for users to discover and utilize them. Simultaneously, efforts can be directed towards increasing the visibility of lesser-used extensions, aiding their recognition and potentially encouraging more users to explore and benefit from them.<br>
+                  By analyzing each extension usage data, the developers can make informed decisions regarding extensions that receive little to no utilization. This data-driven approach enables them to optimize their efforts and resources by focusing on more commonly used sources.<br><br>
+                  Furthermore, if the least-used extensions involve financial costs, identifying and discontinuing them can result in cost savings for the developers. Therefore, this analysis not only streamlines the user experience but also ensures the efficient allocation of resources within the app's ecosystem.<br><br>
+                  Furthermore, developers have the opportunity to enhance the "sources" and "extensions" views. They can implement features that recommend the most popular extensions, making it easier for users to discover and utilize them. Simultaneously, efforts can be directed towards increasing the visibility of lesser-used extensions, aiding their recognition and potentially encouraging more users to explore and benefit from them.<br>
                </p></div>
             </div>
 
@@ -346,15 +450,2405 @@ Furthermore, developers have the opportunity to enhance the "sources" and "exten
             <a  class="text"  href="https://github.com/tachiyomiorg/tachiyomi/blob/3cd3f45c8a47790edb3dd687942dd1539efe27c7/data/src/main/sqldelight/tachiyomi/data/history.sq">history.sq File</a>
             </div>
          </div>   
+         <!--PART 2-->
+         <div class="part" id="page2">
+            <h2 class="part-title" data-aos="fade-right">Part 2</h2>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 24-Nov-2023 (Feedback revisions completed)</i></h7>
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Use your knowledge in design patterns and architecture patterns to analyze the ones used in the app. You must include snippets of code that proves what you are saying.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Architecture</h3>
+            <h4 class="part-title" data-aos="fade-right">Factory Method</h4>
+            <div class="text-block" data-aos="fade-right" >
+               <p class="text">
+                  As a brief context, the intent of the Factory Method design pattern is to define an interface for creating an object and let subclasses decide which class it is going to be instantiated. The Application class can't predict the characteristics of the object to instantiate, it only knows when a new object should be created (Gamma et al., 1995).
+               </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig1.png" data-description="Figure 1. Structure of Factory Method pattern (Gamma et al., 1995)">
+                        <img class="img_part" src="img/part2/nfig1.png">
+                     </a>
+                     <p>Figure 1. Structure of Factory Method pattern (Gamma et al., 1995)</p>
+                  </div>
+                  <p class="text">
+                  Product defines the interface of objects the factory method creates. ConcreteProduct oversees the implementation of the Product interface. Creator is the one that declares the factory method, which returns an object of type Product. The Creator class can also define a default implementation of the factory method that returns a default ConcreteProduct object (Gamma et al., 1995).<br><br>
+                  In Tachiyomi, we can notice the implementation of the factory method pattern by seeing how Manga and MangaCover objects are created in the main App class Kotlin file, especifically in lines 138, 147,148 and 152.
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig2.png" data-description="Figure 2. Implementation of Manga and MangaCover loader in main App file<">
+                        <img class="img_part" src="img/part2/nfig2.png">
+                     </a>
+                     <p>Figure 2. Implementation of Manga and MangaCover loader in main App file</p>
+                  </div>
+                  <p class="text">
+                  When we go to the MangaCoverFetcher file, we can see that it is the class file in which the classes MangaFactory and MangaCoverFactory (while implementing a Fetcher interface) define and create the Manga and MangaCover objects. The characteristics of both classes are expressed in each of the constructors.
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig3.png" data-description="Figure 3. MangaFactory class in MangaCoverFetcher file">
+                        <img class="img_part" src="img/part2/nfig3.png">
+                     </a>
+                     <p>Figure 3. MangaFactory class in MangaCoverFetcher file</p>
+                  </div>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig4.png" data-description="Figure 4. MangaCoverFactory class in MangaCoverFetcher file">
+                        <img class="img_part" src="img/part2/nfig4.png">
+                     </a>
+                     <p>Figure 4. MangaCoverFactory class in MangaCoverFetcher file</p>
+                  </div>         
+            </div>
+            <h4 class="part-title" data-aos="fade-right">Data Mapper</h4>
+            <div class="text-block" data-aos="fade-right" >
+               <p class="text">
+                  According to Fowler & Rice (2003), in the Data Mapper pattern, the general procedure is to put a layer of “Mappers” that move data between objects of the application domain and the database while keeping them independent of each other and the mapper itself.<br><br>
+                  The Data Mapper layer separates the in-memory objects from the database; hence its responsibility is to transfer data between them and isolate them from each other. Because of this, the in-memory objects don’t need a SQL interface code nor knowledge of the database schema, in fact, the Data Mapper layer itself is even unknown to the domain layer.
+               </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig5.png" data-description="Figure 5. Example of Data Mapper architectural pattern (Fowler & Rice, 2003)">
+                        <img class="img_part" src="img/part2/nfig5.png">
+                     </a>
+                     <p>Figure 5. Example of Data Mapper architectural pattern (Fowler & Rice, 2003)</p>
+                  </div>
+               <p class="text">
+                  It is possible to see the implementation of this pattern when we take a closer look at how data-related classes are built. Each one of the classes that are defined in the “data” directory has its own Mapper.
+               </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig6.png" data-description="Figure 6. Data directory from repository">
+                        <img class="img_part" src="img/part2/nfig6.png">
+                     </a>
+                     <p>Figure 6. Data directory from repository</p>
+                  </div>
+                  <p class="text">
+                  Taking the ChapterMapper file as an example we can detail how the code is transforming information from the database into objects of the Chapter class (which is an abstract representation of a manga chapter). The function chapterMapper gets all the information of a “chapter” as parameters and constructs a Chapter object that is going to be returned.
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig7.png" data-description="Figure 7. Code of ChapterMapper">
+                        <img class="img_part" src="img/part2/nfig7.png">
+                     </a>
+                     <p>Figure 7. Code of ChapterMapper</p>
+                  </div>
+                  <p class="text">
+                  In the same “data” directory, we can also see the AndroidDatabaseHandler file, which appears to be responsible for obtaining the information from the database through queries and defining how these mappings are done within the logic of the application.
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig8.png" data-description="Figure 8. Mapping handling in AndroidDatabaseHandler">
+                        <img class="img_part" src="img/part2/nfig8.png">
+                     </a>
+                     <p>Figure 8. Mapping handling in AndroidDatabaseHandler</p>
+                  </div>
+            </div>
+
+            <h4 class="part-title" data-aos="fade-right">MVC (Model-View-Presenter)</h4>
+            <div class="text-block" data-aos="fade-right" >
+               <p class="text">
+                  In the MVC pattern, responsibilities are separated across three components of the system: the model, the view and the presenter. The model is responsible for implementing business logic, business behaviors and state management. In the second place, the view is responsible for rendering the UI elements of the app/system. Finally, the presenter is the one that interacts with the view and model, separating them from each other (Baeldung, 2022).
+               </p>
+               
+               <p class="text">
+                  The presenter triggers the business logic and enables the view to update. It also receives data that is sent from the model and shows it through the view. In this way, testing the correct functioning of the presenter is much easier.
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig9.png" data-description="Figure 9. Diagram of MVP pattern (Baeldung, 2022)">
+                     <img class="img_part" src="img/part2/nfig9.png">
+                  </a>
+                  <p>Figure 9. Diagram of MVP pattern (Baeldung, 2022)</p>
+               </div>
+               <p class="text">
+                  We can see the implementation of this pattern in the Tachiyomi app by seeing the “presentation” directory. As its name says, this directory contains the classes of the app that work as presenters. Taking the example of showing the manga library to the user, we’ll detail the LibraryList class file. First, some components of the UI (i.e., the view) are imported:
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig10.png" data-description="Figure 10. UI imports in LibraryList file">
+                     <img class="img_part" src="img/part2/nfig10.png">
+                  </a>
+                  <p>Figure 10. UI imports in LibraryList file</p>
+               </div>
+               <p class="text">
+                  Some components of the model are also imported, these are the LibraryManga and MangaCover classes:
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig11.png" data-description="Figure 11. Model imports in LibraryList file">
+                     <img class="img_part" src="img/part2/nfig11.png">
+                  </a>
+                  <p>Figure 11. Model imports in LibraryList file</p>
+               </div>
+               <p class="text">
+                  Finally, we can see how, by getting the list of mangas from the model using a query, the presenter uses elements of the view to subsequently show the information to the user.
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig12.png" data-description="Figure 12. Code of the LibraryList file">
+                     <img class="img_part" src="img/part2/nfig12.png">
+                  </a>
+                  <p>Figure 12. Code of the LibraryList file</p>
+               </div>
+               <p class="text">
+                  This is not the only example that is present in the app, in fact, the presentation directory implements these characteristics for other elements of the logic, like the history, the manga categories or some of the manga's information.
+               </p>
+            </div>
+            
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Use your knowledge in UI/UX to describe and analyze the design of your app. Describe all the basic components of the UI/UX of the selected app (color, fonts, design metaphor, etc.), answer the following questions: what do you think can be improved? What did you like? For the groups of 3, analyze in detail at least 3 views.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Design System</h3>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">
+                  A design system serves as the foundation for achieving consistency, user-friendliness, and aesthetic excellence in products. It encompasses a wide range of principles, resources, and elements, which aid design and development teams in preserving brand unity and simplifying the product creation process.
+               </p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Visual Identity</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+               <p class="text">
+                  <b>Color Palette:</b> Tachiyomi's color palette is a blend of three distinct colors: Tang blue, Office green, and Raisin black. Tang blue adds a sense of vibrancy and energy, creating an engaging and dynamic visual experience. Office green brings a touch of freshness and harmony, making the app feel welcoming and balanced. Raising black provides a solid and sophisticated foundation, adding depth and contrast to the overall design. Together, these colors contribute to Tachiyomi's unique and visually appealing user interface, enhancing the reading experience for manga enthusiasts.
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig13.png" data-description="Figure 9. Tang Blue Color - Monocromatic Palette">
+                     <img class="img_part" src="img/part2/nfig13.png">
+                  </a>
+                  <p>Figure 9. Tang Blue Color - Monocromatic Palette</p>
+               </div>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig14.png" data-description="Figure 10. Office Green Color - Monocromatic Palette">
+                     <img class="img_part" src="img/part2/nfig14.png">
+                  </a>
+                  <p>Figure 10. Office Green Color - Monocromatic Palette</p>
+               </div>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig15.png" data-description="Figure 11. Raisin Black Color - Monocromatic Palette">
+                     <img class="img_part" src="img/part2/nfig15.png">
+                  </a>
+                  <p>Figure 11. Raisin Black Color - Monocromatic Palette</p>
+               </div>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Typography:</b> 
+                     <ul>
+                        <li class="text">Heebo is a sans-serif font with a clean and contemporary design. Its legibility and versatility make it an excellent choice for digital interfaces, including apps like Tachiyomi. Heebo's balanced proportions and rounded letterforms contribute to a pleasant and accessible reading experience.</li>
+                        <li class="text">Tachiyomi with Heebo Font: When Tachiyomi is configured to use the Heebo font, it brings a polished and streamlined look to the app. The text in manga titles, descriptions, and navigation elements becomes more readable and aesthetically pleasing. Heebo's crisp and well-defined characters ensure that readers can enjoy their favorite manga titles with clarity and comfort.</li>
+                     </ul>
+                  </p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part2/nfig16.png" data-description="Figure 12. Sans Serif Media (font family) - Heebo (font style)">
+                        <img class="img_part" src="img/part2/nfig16.png">
+                     </a>
+                     <p>Figure 12. Sans Serif Media (font family) - Heebo (font style)</p>
+                  </div>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Design Metaphor:</b> 
+                     <ul>
+                        <li class="text">Navigation Structure: Tachiyomi employs tabs to categorize various app sections, such as "Browse," "Library," and "Downloads." These tabs function similarly to pages in a book, aiding users in moving through the app's content seamlessly</li>
+                        <li class="text">Reading Reminders: Users can place bookmarks in Tachiyomi to mark specific chapters or pages within a manga. This feature acts as a digital equivalent of inserting a physical bookmark in a book to remember where the reader left off.</li>
+                        <li class="text">Visual Selection: While exploring manga titles in Tachiyomi, users often encounter cover art for each series. This mimics the role of a physical book cover, assisting users in assessing content and making choices based on visual appeal.</li>
+                     </ul>
+                  </p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <p class="text">
+                  <b>Views Analysis: </b><br><br>
+                  Tachiyomi's <span onclick="overrideFigure(17)" id="fig17span" class="figspan">"History"</span>, <span onclick="overrideFigure(18)" id="fig18span" class="figspan">“Browse”</span> and <span onclick="overrideFigure(19)" id="fig19span" class="figspan">“Settings”</span> views are designed with a clean and minimalistic layout, which is a hallmark of its user interface. This design approach prioritizes simplicity and organization, ensuring that users can easily access and navigate their reading history without distractions or navigate through the different options of the UI in a simple way.<br><br> 
+                  Users often have the flexibility to choose between a list view and a grid view. This feature caters to different user preferences, allowing them to select the visual layout that suits them best.<br><br>
+                  Each entry typically displays essential information such as the chapter number, the title and incorporates timestamps into each entry. This presentation allows users to quickly identify which chapters they have read and which ones they may want to revisit.<br><br>
+                  The app employs a high-contrast color scheme, enhancing readability and ensuring that users can enjoy their manga reading experience without visual strain.<br><br>
+                  Tachiyomi stands out not only for its extensive library and user customization but also for its thoughtful use of icons. These visual cues play a pivotal role in guiding users through the app's multifaceted features and functions.
+               </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Things to Improve:</b> 
+                     <ul>
+                        <li class="text">Onboarding Experience: Improving the initial onboarding experience for new users could help them understand the app's features and functionalities more easily. This could include interactive tutorials or tooltips to guide users through the app's core functions.</li>
+                        <li class="text">Enhanced Search: The search feature is crucial for users to discover new manga. Enhancements in search functionality, such as filters, sorting options, and advanced search criteria, could make it easier for users to find specific manga titles or genres.</li>
+                        <li class="text">User Feedback Integration: Streamlining the process for users to provide feedback or report issues directly within the app can help the development team address bugs and gather valuable insights for future improvements.</li>
+                        <li class="text">Personalized Recommendations: Implementing a recommendation system based on a user's reading history and preferences can help users discover new manga titles that align with their interests.</li>
+                     </ul>
+                  </p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  add_circle
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>What we like:</b> 
+                     <ul>
+                        <li class="text">Customizability: Tachiyomi allows users to customize the reading experience to their preferences. This includes customizable themes, reading direction, and various view options, making it easier for users to read manga comfortably.</li>
+                        <li class="text">User-Friendly Interface: Tachiyomi's interface is intuitive and easy to navigate, making it convenient for users to discover, manage, and organize their manga collections. The app's user-friendly design enhances the overall reading experience and enables users to access their favorite manga titles quickly.</li>
+                        <li class="text">Library Support: Tachiyomi supports multiple manga sources, allowing users to access a vast collection of manga from various online repositories. This extensive library support ensures that users can find and read a diverse range of manga titles within the app.</li>
+                     </ul>
+                  </p>
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Based on your analysis, what quality attributes is your app managing? How are they doing it? For the groups of 3, describe at least 3 quality attributes.</p>
+            </div>
+            <h4 class="part-title" data-aos="fade-right">Maintainability</h4>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">
+                  Tachiyomi is a highly maintainable app. This allows Tachiyomi to be a community app where literally everyone can apport. There are three main factors in the development that are responsible for this quality attribute:
+                  <ul>
+                     <li class="text">Modular Design: Tachiyomi modularity makes adding new features easy and allows fixing bugs without affecting the rest of the app. In the repository, it’s clear which are these compile-independent modules. <br><br>
+                        <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                           <a class="spotlight" href="img/part2/nfig17.png" data-description="Figure 16. Repository of Tachiyomi app">
+                              <img class="img_part" src="img/part2/nfig17.png">
+                           </a>
+                           <p>Figure 16. Repository of Tachiyomi app</p>
+                        </div>
+                     <p class="text">Each main folder (first level in the hierarchy) contains a module. That’s why is a build.gradle file in each main folder allowing independent compilation.</p>
+                     <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                        <a class="spotlight" href="img/part2/nfig18.png" data-description="Figure 17. Directories of the repository">
+                           <img class="img_part" style="max-width: 300px;" src="img/part2/nfig18.png">
+                        </a>
+                        <p>Figure 17. Directories of the repository</p>
+                     </div>
+                     </li>
+                     <li class="text">Extensive documentation: The extensive documentation makes it easy for new developers to contribute to the project and for existing developers to maintain the code. 
+                        <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                           <a class="spotlight" href="img/part2/nfig19.png" data-description="Figure 18. Documentation of Tachiyomi">
+                              <img class="img_part" src="img/part2/nfig19.png">
+                           </a>
+                           <p>Figure 18. Documentation of Tachiyomi</p>
+                        </div>
+                        <p class="text">In the repository documentation, they are very clear in the process of contributing to the repository. The developers must follow strict guidelines and follow several steps for community verification of the new code. For example, they gave examples of how and how not to deal with a bug.</p>
+                        <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                           <a class="spotlight" href="img/part2/nfig20.png" data-description="Figure 19. Tachiyomi repository README">
+                              <img class="img_part" src="img/part2/nfig20.png">
+                           </a>
+                           <p>Figure 19. Tachiyomi repository README</p>
+                        </div>
+                     </li>
+                     <li class="text">Community: The community at Tachiyomi is very proactive. They have a Discord server where if someone finds a bug, they can post it and the developers will be quickly notified allowing for promptly fixing it.
+                        <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                           <a class="spotlight" href="img/part2/nfig21.png" data-description="Figure 20. Tachiyomi Discord server">
+                              <img class="img_part" src="img/part2/nfig21.png">
+                           </a>
+                           <p>Figure 20. Tachiyomi Discord server</p>
+                        </div>
+
+                     </li>
+                  </ul>
+               </p>
+            </div>
+            <h4 class="part-title" data-aos="fade-right">Usability</h4>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">
+                  Tachiyomi is a very user-friendly app, with a simple and intuitive interface. It’s quite clear the developer's focus was to make it simple while maintaining it feature-rich. <br><br>
+                  In the previous part of this App Report, when exploring functionalities, we observed that the reader view is a simple view that maintains a very robust set of configurations. In the (a) figure the main configuration is shown: <span onclick="overrideFigure(20)" id="fig20span" class="figspan">the reading mode (way to navigate through the manga)</span>. Also, in the tab bar at the bottom, the option to crop the image and rotation mode selection. <span onclick="overrideFigure(21)" id="fig21span" class="figspan">But in the settings menu the user goes from changing behavior when tapping</span>, <span onclick="overrideFigure(22)" id="fig22span" class="figspan">to adjust color filters for an enhanced reading experience.</span><br><br>
+                  Another feature that goes in direction of improving usability it’s the powerful search that allows users to easily find the manga series that they are looking for. The users can search by title, author, genre, and other criteria.<br><br>
+                  Tachiyomi is also compatible with system dictated accessibility features. For example the components are labeled so if TalkBack is enabled, the user could navigate through voice.
+               </p>
+            </div>
+
+            <h4 class="part-title" data-aos="fade-right">Performance</h4>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">
+                  Tachiyomi is a very performant app, with fast loading times. This attribute is achieved through several optimizations such as caching images and using a lightweight user interface.<br><br>
+                  Tachiyomi is designed to work with most Android devices, starting with Android 6.0. So, to make it work for all these devices they need to be very careful with the use of system resources, because in a big portion of the Android devices the optimization is critical. This well-implement performance improvement are delivered by the active development community that constantly improves the application.<br><br>
+                  For example, some years ago users noticed a slow performance after reading 3-5 chapters (https://github.com/tachiyomiorg/tachiyomi/issues/1063). That error was due to the memory usage, Tachiyomi was consuming a lot of resources maintaining in memory all the pages already read. A developer 15 days later contributed and solved the issue including image caching (https://github.com/tachiyomiorg/tachiyomi/pull/1085). 
+               </p>
+               <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                  <a class="spotlight" href="img/part2/nfig22.png">
+                     <img class="img_part" src="img/part2/nfig22.png">
+                  </a>
+               </div>
+            </div>
+
+            <div class="text-block" data-aos="fade-right">
+               <p class="question">Describe: What libraries and dependencies do your app implement? What are they for?</p>
+            </div>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">
+                  The dependencies are available on the build.gradle files. As explained in the previous section, Tachiyomi application is divided in multiple modules that are compiled independently. 
+                  <br><br>
+                  In the core module all the other modules are called as dependencies:
+               </p>
+               <pre><code class="language-kotlin">
+dependencies {
+   implementation(project(":i18n"))
+   implementation(project(":core"))
+   implementation(project(":core-metadata"))
+   implementation(project(":source-api"))
+   implementation(project(":source-local"))
+   implementation(project(":data"))
+   implementation(project(":domain"))
+   implementation(project(":presentation-core"))
+   implementation(project(":presentation-widget"))
+}                 
+               </code></pre>
+
+            </div>
+            <div class="text-block" data-aos="fade-right">
+               <p class="text">We merged all dependencies and grouped by their functionalities or packages:
+            </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div >
+               <p class="text">
+                  <b>I18n:</b> Library added to support internalization in the application. That means having different languages on the same app.<br><br>
+                  That is noticeable in <a href="https://github.com/tachiyomiorg/tachiyomi/tree/d4dfa9a2c2a6e627256e99efb08e150a6d234964/i18n/src/commonMain/resources/MR">Link</a> when all the languages supported by Tachiyomi are there. For example in the sub-folders we found:
+                  <pre lang="xml"><code class="language-xml">
+<textarea>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      <string name="name">Nombre</string>
+      <string name="label_settings">Ajustes</string>
+      <string name="label_download_queue">Cola de descargas</string>
+      <string name="label_library">Biblioteca</string>
+      <string name="label_recent_manga">Historial</string>
+      <string name="label_recent_updates">Actualizaciones</string>
+…
+</resources>  
+</textarea>                  
+                  </code></pre>
+
+               </p>
+               <p class="text">
+                  In most of the view files, they import the i18n strings (import tachiyomi.core.i18n.stringResource) to use it in different langueges without recreating a view for each language.
+               </p>
+               </div>
+            </div>     
+            
+            
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div >
+               <p class="text">
+                  <b>Compose Libraries:</b> These libraries support the generation of the UI using a declarative style. Allows to use Material components and Animations as well.
+                  <pre lang="xml"><code class="language-kotlin">
+implementation(platform(compose.bom))
+implementation(compose.activity)
+implementation(compose.foundation)
+implementation(compose.material3.core)
+implementation(compose.material.core)
+implementation(compose.material.icons)
+implementation(compose.animation)
+implementation(compose.animation.graphics)
+debugImplementation(compose.ui.tooling)
+implementation(compose.ui.tooling.preview)
+implementation(compose.ui.util)
+implementation(compose.accompanist.webview)
+implementation(compose.accompanist.permissions)
+implementation(compose.accompanist.themeadapter)
+implementation(compose.accompanist.systemuicontroller)           
+                  </code></pre>
+
+               </p>
+               <p class="text">
+                  Tachiyomi generate the UI in a declarative way, so uses the Kotlin Composer for all view. For example in <code>app/src/main/java/eu /kanade/presentation /browse/GlobalSearchScreen.kt</code> they use the next snippet of code to generate the UI when searching in the whole application. 
+               </p>
+               <p class="text">
+                  <pre><code class="language-kotlin">
+@Composable
+fun GlobalSearchScreen(
+      state: SearchScreenModel.State,
+      navigateUp: () -> Unit,
+      onChangeSearchQuery: (String?) -> Unit,
+      onSearch: (String) -> Unit,
+      onChangeSearchFilter: (SourceFilter) -> Unit,
+      onToggleResults: () -> Unit,
+      getManga: @Composable (Manga) -> State<Manga>,
+      onClickSource: (CatalogueSource) -> Unit,
+      onClickItem: (Manga) -> Unit,
+      onLongClickItem: (Manga) -> Unit,
+) {
+      Scaffold(
+         topBar = { scrollBehavior ->
+            GlobalSearchToolbar(
+                  searchQuery = state.searchQuery,
+                  progress = state.progress,
+                  total = state.total,
+                  navigateUp = navigateUp,
+                  onChangeSearchQuery = onChangeSearchQuery,
+                  onSearch = onSearch,
+                  sourceFilter = state.sourceFilter,
+                  onChangeSearchFilter = onChangeSearchFilter,
+                  onlyShowHasResults = state.onlyShowHasResults,
+                  onToggleResults = onToggleResults,
+                  scrollBehavior = scrollBehavior,
+            )
+         },
+      ) { paddingValues ->
+         GlobalSearchContent(
+            items = state.filteredItems,
+            contentPadding = paddingValues,
+            getManga = getManga,
+            onClickSource = onClickSource,
+            onClickItem = onClickItem,
+            onLongClickItem = onLongClickItem,
+         )
+      }
+}                 
+                  </code></pre>
+
+               </p>
+               </div>
+            </div>  
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>AndroidX Libraries:</b> This are system-related libraries that allows to compile the UI and implements  features related to the phone sources.
+                     <pre><code class="language-kotlin">
+implementation(androidx.annotation)
+implementation(androidx.appcompat)
+implementation(androidx.biometricktx)
+implementation(androidx.constraintlayout)
+implementation(androidx.corektx)
+implementation(androidx.splashscreen)
+implementation(androidx.recyclerview)
+implementation(androidx.viewpager)
+implementation(androidx.profileinstaller)
+                     </code></pre>
+                  </p>
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Job Scheduling:</b> These are libraries to schedule start of the asynchronous process.
+                  </p>
+                     <pre><code class="language-kotlin">
+implementation(androidx.bundles.workmanager)
+                     </code></pre>
+                     <p class="text">
+                     Some tasks require a big workload so the task is scheduled. For example, when restoring backups, in the next snippet of code, it can be seen how Tachiyomi uses the Work Manager to initiate a background process.
+                     </p>
+                     <pre><code class="language-kotlin">
+class BackupRestoreJob(private val context: Context, workerParams: WorkerParameters) :
+CoroutineWorker(context, workerParams) {
+
+private val notifier = BackupNotifier(context)
+
+override suspend fun doWork(): Result {
+      val uri = inputData.getString(LOCATION_URI_KEY)?.toUri()
+         ?: return Result.failure()
+      val sync = inputData.getBoolean(SYNC_KEY, false)
+
+      try {
+         setForeground(getForegroundInfo())
+      } catch (e: IllegalStateException) {
+         logcat(LogPriority.ERROR, e) { "Not allowed to run on foreground service" }
+      }
+
+      return try {
+         val restorer = BackupRestorer(context, notifier)
+         restorer.syncFromBackup(uri, sync)
+         Result.success()
+      } catch (e: Exception) {
+         if (e is CancellationException) {
+            notifier.showRestoreError(context.stringResource(MR.strings.restoring_backup_canceled))
+            Result.success()
+         } else {
+            logcat(LogPriority.ERROR, e)
+            notifier.showRestoreError(e.message)
+            Result.failure()
+         }
+      } finally {
+         context.cancelNotification(Notifications.ID_RESTORE_PROGRESS)
+      }
+}
+
+override suspend fun getForegroundInfo(): ForegroundInfo {
+      return ForegroundInfo(
+         Notifications.ID_RESTORE_PROGRESS,
+         notifier.showRestoreProgress().build(),
+      )
+}
+
+companion object {
+      fun isRunning(context: Context): Boolean {
+         return context.workManager.isRunning(TAG)
+      }
+
+      fun start(context: Context, uri: Uri, sync: Boolean = false) {
+         val inputData = workDataOf(
+            LOCATION_URI_KEY to uri.toString(),
+            SYNC_KEY to sync,
+         )
+         val request = OneTimeWorkRequestBuilder<BackupRestoreJob>()
+            .addTag(TAG)
+            .setInputData(inputData)
+            .build()
+         context.workManager.enqueueUniqueWork(TAG, ExistingWorkPolicy.KEEP, request)
+      }
+
+      fun stop(context: Context) {
+         context.workManager.cancelUniqueWork(TAG)
+      }
+}
+}
+                    
+                     </code></pre>
+                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     
+                     <b>Networking:</b> To handle internet connections with added features.
+                  </p>
+                     <pre><code class="language-kotlin">
+implementation(libs.bundles.okhttp)
+implementation(libs.okio)
+implementation(libs.conscrypt.android) // TLS 1.3 support for Android < 10                    
+                     </code></pre>
+                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_6
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Data Serialization:</b> Save data in JSON, XML and other formats.
+                  </p>
+                     <pre><code class="language-kotlin">
+implementation(kotlinx.bundles.serialization)
+                     </code></pre>
+                
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_7
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Disk related:</b> Libraries for LRU Cache, handle compressed files, etc.
+                  </p>
+                     <pre><code class="language-kotlin">
+implementation(libs.disklrucache)
+implementation(libs.unifile)
+implementation(libs.junrar)
+                     </code></pre>
+                     <p class="text">
+                     Tachiyomi use LRU cache when caching chapter app/src/main/java/eu/kanade/tachiyomi/data/cache/ChapterCache.kt. Here we can observe the initialization of the object.
+                     </p>
+                     <pre><code class="language-kotlin">
+private val diskCache = DiskLruCache.open(
+        File(context.cacheDir, "chapter_disk_cache"),
+        PARAMETER_APP_VERSION,
+        PARAMETER_VALUE_COUNT,
+        PARAMETER_CACHE_SIZE,
+    )
+                     </code></pre>
+                     <p class="text">
+                     After that they use it in different methos for saving and getting pages. For example <code>fun getPageListFromCache(chapter: Chapter): List<Page></code> or <code>fun putPageListToCache(chapter: Chapter, pages: List<Page></code>)
+                  </p>
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_8
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Image Loading:</b> Allows caching images and handle different image files.
+                  </p>
+                     <pre><code class="language-kotlin">
+implementation(platform(libs.coil.bom))
+implementation(libs.bundles.coil)
+implementation(libs.subsamplingscaleimageview) {
+      exclude(module = "image-decoder")
+}
+implementation(libs.image.decoder) 
+                     </code></pre>
+                     <p class="text">
+                     For example when loading the images from the pages (app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/ReaderPageImageView.kt). They set specific policies for saving in disk and in memory.
+                     </p>
+                     <pre><code class="language-kotlin">
+val request = ImageRequest.Builder(context)
+.data(data)
+.memoryCachePolicy(CachePolicy.DISABLED)
+.diskCachePolicy(CachePolicy.DISABLED)
+.target(
+      onSuccess = { result ->
+         setImageDrawable(result)
+         (result as? Animatable)?.start()
+         isVisible = true
+         this@ReaderPageImageView.onImageLoaded()
+      },
+      onError = {
+         this@ReaderPageImageView.onImageLoadError()
+      },
+)
+.crossfade(false)
+.build()
+context.imageLoader.enqueue(request)
+                     </code></pre>
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_9
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Logging:</b> Library native of the system that allows labeled logs and is optimized for ADB (android debugger bridge).
+                     <pre><code class="language-kotlin">
+implementation(libs.logcat)                 
+                     </code></pre>
+                  </p>
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  timer_10
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Crash reports and analytics (telemetry):</b> Sends information related to the crashes and app performances using firebase API. The last dependency allows notifications when the app have exceptions related to memory leaking.
+                     <pre><code class="language-kotlin">
+implementation(libs.acra.http)
+implementation(libs.bundles.shizuku)
+implementation(libs.leakcanary.plumber)                 
+                     </code></pre>
+                  </p>
+               </div>
+            </div>
+
+            <div class="text-block block" data-aos="fade-right" style="display: flex; flex-direction: column;">
+               <h3 class="part-title" data-aos="fade-right">References</h3>
+               <ul>
+                  <li  class="text">Fowler, M., & Rice, D. (2003). <i>Patterns of enterprise Application Architecture. Addison-Wesley Professional</i></li>
+                  <li  class="text">Gamma, E., Johnson, R., Helm, R., Johnson, R. E. ., & Vlissides, J. (1995). <i>Design patterns: Elements of Reusable Object-Oriented Software</i>. Pearson Deutschland GmbH</li>
+                  <li  class="text">Baeldung. (2022). Difference between MVC and MVP patterns | Baeldung. <i>Baeldung</i>. <a href="https://www.baeldung.com/mvc-vs-mvp-pattern">https://www.baeldung.com/mvc-vs-mvp-pattern</a></li>
+               </ul>
+            </div>
+
+
+
+
+
+
+
+         </div>
+         <!--END PART 2-->
+         <!--PART 3-->
+         <div class="part" id="page3">
+            <h2 class="part-title" data-aos="fade-right">Part 3</h2>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 24-Nov-2023 <span id="fb_p3" style="cursor: pointer; text-decoration: underline;">(Feedback revisions completed)</span></i></h7>
+            <div class="mdl-tooltip" for="fb_p3">
+               - Caching Strategies: Include snippets of code of the first strategy.<br>
+               - Caching Strategies: Include the average amount of cache storage used by Tachiyomi<br>
+               - Memory management strategies: Mentions the data structures used, as well management<br> of weak references, garbage collector, image caching, general strategy of caching and improves <br>the explanation in each snippet of code.</li>
+               </ul>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="question">Identify good/bad Eventual connectivity (ECn) strategies in the third-party app</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi is a primary offline manga reader that utilizes connectivity for several purposes, including downloading content from third-party providers, updating information in manga trackers, and checking for app updates. The eventual connectivity within the application involves caching, retrieval, and fetching strategies. The following section discusses caching strategies. In this part, we will review best practices in the use of fetching strategies and identify bad practices in the form of anti-patterns.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Fetching Strategies:</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Checking & Downloading App Updates:</b> All the code related to app updates is available on the folder app/src/main/java/eu/kanade/tachiyomi/data/updater. In this folder there are three files that focus on two activities: checking for updates, downloading and initiating installation of the update.<br><br>
+                     When the application is launched, it initiates the checkForUpdate() function. As observed from the code presented (Figure 1), this function is a suspend function, thus requiring asynchronous invocation, either within another suspend function or within a coroutine. This fetching strategy retrieves data at launch time (background fetch).
+
+                  </p>          
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig1.png" data-description="Figure 1. Code for Checking App Updates Summary">
+                        <img class="img_part" src="img/part3/nfig1.png">
+                     </a>
+                     <p>Figure 1. Code for Checking App Updates Summary</p>
+                  </div>
+                  <div class="text-block" data-aos="fade-right" style="display: flex;">
+                     <p class="text"><span onclick="overrideFigure(23)" id="fig23span" class="figspan">When a new version is available, the application sends a push notification to the system panel (Figure 3)</span>. <span onclick="overrideFigure(24)" id="fig24span" class="figspan">It also displays a screen with the choice to either download the APK immediately (Download) or postpone it (Not now) (Figure 2).</span> 
+                        <br><br>
+                        <span onclick="overrideFigure(25)" id="fig25span" class="figspan">If the user decides to download the new version, Tachiyomi keeps the download process in the foreground, by generating a notification that provides real-time updates on the download progress (Figure 4).</span> Please take notice that in the download, another fetching strategy is employed, which is: pull (on user demand).
+                        </p>
+                  </div>
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Update read status on mange trackers:</b> Tachiyomi also utilizes connectivity to update the reader's status on linked manga trackers. <span onclick="overrideFigure(26)" id="fig26span" class="figspan">As shown in Figure 5, some manga is linked to Anilist, which serves as a tracker.</span> The data fetching strategy, in this case, is determined by an expiration policy. At regular intervals, the application sends data to the tracker. As oberved from the code (Figure 6), the application asynchronously (suspend function) retrieves and manages this data in the background using a service.
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig2.png" data-description="Figure 6. Code for update state in external manga tracker">
+                        <img class="img_part" src="img/part3/nfig2.png">
+                     </a>
+                     <p>Figure 6. Code for update state in external manga tracker</p>
+                  </div>               
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Downloading content from providers: </b> The main classes in charge of download the main content in the app are locate on app/src/main/java/eu/kanade/tachiyomi/data/download folder. In order to discover the fetching strategy, we analyze the code of the principal class.
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig3.png" data-description="Figure 7">
+                        <img class="img_part" src="img/part3/nfig3.png">
+                     </a>
+                     <p>Figure 7</p>
+                  </div>               
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Antipatterns: The next are bad handling of connectivity examples in Tachiyomi. For each anti-patter is the number according to the slides of the course. </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Anti-pattern #2: Stuck Progress Notification:</b> When the app is initially launched with an internet connection, it assumes connectivity is constant. However, if the internet is deactivated and a download is initiated, the app gets stuck on a progress notification, as it falsely believes it still has an active connection. This issue can be easily resolved by implementing a listener for connectivity changes. <span onclick="overrideFigure(27)" id="fig27span" class="figspan">By doing so, the app can respond more effectively to real-time events, ensuring a smoother user experience (Figure 8).</span>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Anti-pattern #3: Non-informative Message:</b> This anti-pattern is encountered under similar circumstances as the previous one. When the app lacks network connectivity at startup, it can display a non-informative error message in response to a connection attempt (<span onclick="overrideFigure(28)" id="fig28span" class="figspan">Figure 9</span> and Figure <span onclick="overrideFigure(29)" id="fig29span" class="figspan">10</span>). <span onclick="overrideFigure(30)" id="fig30span" class="figspan">Most users may find this message unhelpful as it does not clearly communicate the issue.</span> The solution, as mentioned before, is to include a connectivity listener to keep the app informed of the network status in real-time. This way, the app can provide informative messages that users can understand.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Anti-Pattern 4: Lost Content:</b> <span onclick="overrideFigure(31)" id="fig31span" class="figspan">The final anti-pattern occurs in situations with poor network connectivity, as depicted in Figure 12.</span> Ideally, each container should display an image, but due to the unreliable connection, they remain empty. Moreover, there are no placeholder elements, such as loading skeletons, to indicate to the user that the images are in the process of loading. The solution is straightforward: introduce images or animations in each container to signal that content is loading. This will improve the user experience and prevent the loss of content.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="question">Identify and evaluate Caching Strategies of the third-party app that you are analyzing.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi is an Android application that prioritizes storage data and can work completely without an internet connection. It’s possible to import manga from local storage, which makes it convenient for users who want to read manga offline. For this reason, Tachiyomi’s caching strategy is <b>offline first</b>. The app uses a simple caching mechanism to store manga in memory, which is cleared when the app is closed or when the device runs low on memory.<br><br>
+               Although Tachiyomi can work completely offline, the normal use of the app involves downloading manga from third-party sources available within the app. These sources are community-driven and provide a wide range of manga titles for users to choose from.<br><br>
+               Depending on the type of data Tachiyomi use to different strategies for caching:</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Cache, falling back to network</b> When it comes to manga images, the following strategy is employed: if the image is already present in the cache or stored in permanent local storage, the app refrains from making a download request (<span onclick="overrideFigure(32)" id="fig32span" class="figspan">Figure 13</span>, <span onclick="overrideFigure(33)" id="fig33span" class="figspan">14</span>). Only when the image hasn't been downloaded does the app request the data from the network <span onclick="overrideFigure(34)" id="fig34span" class="figspan">(Figure 15)</span>.
+                  </p>   
+                  <p class="text">
+                     In this scenario, the file responsible for defining the cache can be found at <code>app/src/main/java/eu/kanade/tachiyomi/data/cache/ChapterCache.kt</code>. This file retrieves information from the JSON files created for each image in a manga. Within this class, you can find the implementation of the function <code>getPageListFromCache()</code> (Figure 16). When a page is required, the application employs the HttpPageLoader class. However, as illustrated in Figure 17, this class first checks if the image is already cached and only retrieves it if it is not present (through the condition <code>if (!chapterCache.isImageInCache(imageUrl))</code>).
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig4.png" data-description="Figure 16">
+                        <img class="img_part" src="img/part3/nfig4.png">
+                     </a>
+                     <p>Figure 16</p>
+                  </div>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig5.png" data-description="Figure 16">
+                        <img class="img_part" src="img/part3/nfig5.png">
+                     </a>
+                     <p>Figure 17</p>
+                  </div>               
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Cache then network:</b> A distinct strategy is applied when handling cover images. The application initially checks for the existence of cached cover images. If cached images are found, they are immediately displayed to provide a swift user experience. Simultaneously, the app downloads the cover image in the background. This approach ensures that users receive images quickly, while also enabling the application to reflect any server-side changes. Figure 18 illustrates this process, showing the initial image being replaced with an updated cover image to reflect changes on the server.
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig6.png" data-description="Figure 18">
+                        <img class="img_part" src="img/part3/nfig6.png">
+                     </a>
+                     <p>Figure 18</p>
+                  </div>
+                  <p class="text">
+                     If we examine the file responsible for caching cover images, it is located at <code>app/src/main/java/eu/kanade/tachiyomi/data/cache/CoverCache.kt</code>. Within this file, we can find the method for removing cover images, which are stored in a dedicated folder within the cache storage directory. Figure 20 highlights that the cover image cache utilizes an LRU (Last Recently Used) protocol to manage cache when the allocated memory for caching is full. This cache management method is called from MangaCoverFetcher.kt on CoverCache.kt. The dependency used for this purpose is <code>com.jakewharton:disklrucache:2.0.2.</code>
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig7.png" data-description="Figure 19">
+                        <img class="img_part" src="img/part3/nfig7.png">
+                     </a>
+                     <p>Figure 19</p>
+                  </div>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig8.png" data-description="Figure 20">
+                        <img class="img_part" src="img/part3/nfig8.png">
+                     </a>
+                     <p>Figure 20</p>
+                  </div>
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi sets a fixed maximum storage cache size. We can find this policy on ChapterCache.kt. The maximum amount is 100MB (100*1024*1024bytes).</p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig9.png" data-description="Figure 21">
+                  <img class="img_part" src="img/part3/nfig9.png">
+               </a>
+               <p>Figure 21</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="question">Identify and evaluate Memory Management Strategies of the third-party app you are analyzing</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">App-specific Files</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi's approach to storing data involves creating dedicated directories for efficient organization. When users download manga chapters, the app checks the available disk space. If it's insufficient, an error message is triggered, halting the process. Conversely, if there's enough space, the app defines a directory for storage and initiates the download. To prevent redundant downloads, it checks for existing files. If a chapter is missing on disk, the app fetches it from the network and ensures the retrieved file isn't empty before saving it. Any temporary or incomplete files generated during this process are promptly removed.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In the code snippet (Tachiyomi/data/download/Downloader.kt), the process of checking disk space availability and handling insufficient space is demonstrated, offering insights into alternate strategies when disk space is lacking.</p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig10.png" data-description="Code snippet of manga chapters download process (tachiyomi/data/download/Downloader.kt)">
+                  <img class="img_part" src="img/part3/nfig10.png">
+               </a>
+               <p>Code snippet of manga chapters download process (tachiyomi/data/download/Downloader.kt)</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The code snippet, specifically lines 4-9, illustrates Tachiyomi's initial step before downloading a chapter: checking available disk space. This crucial check determines whether the user can proceed with downloading the chapter. This disk space management has a direct impact on memory usage. When it's impossible to save information to the disk due to space constraints, Tachiyomi implements a strategy to load the content directly into memory via the internet, bypassing the disk storage altogether.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Caching Images</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">While Tachiyomi incorporates the Coil library for image caching, it deliberately opts to manage caching policies directly. This involves disabling Coil's built-in caching policies within specific classes such as BaseUpdatesGridGlanceWidget.kt, SaveImageNotifier.kt, MangaCoverDialog.kt, and ReaderPageImageView.kt.</p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig11.png" data-description="Code snippet of request in BaseUpdatesGridGlanceWidget.kt">
+                  <img class="img_part" src="img/part3/nfig11.png">
+               </a>
+               <p>Code snippet of request in BaseUpdatesGridGlanceWidget.kt</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">These snippets serve as a demonstration of how Tachiyomi chooses to utilize the Coil API while intentionally deactivating Coil's memory and disk caching policies to have greater control over image caching mechanisms. The approach to configuring Coil can be observed in several classes: BaseUpdatesGridGlanceWidget.kt, SaveImageNotifier.kt, MangaCoverDialog.kt, and ReaderPageImageView.kt. These classes demonstrate how Tachiyomi customizes Coil's settings for image handling and caching.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Management of Weak References</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi does not implement in any files the WeakReference class of Kotlin introduced with the library kotlin.native.ref. Coil allows the use of weak reference but as seen in the caching images section they deactivate the memory management policies of coil, restricting as well the option for using Weak References in the images.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">This absence of explicit utilization of Kotlin's WeakReference class is interesting, given its capacity to optimize memory usage by allowing the garbage collector to free memory when necessary without destroying the entire object.</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">General Caching Strategy</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi employs a unified caching strategy that integrates both memory and disk caching for various elements within chapters. For example, in ChapterCache.kt, the app implements an LRU (Least Recently Used) memory cache known as DiskLruCache. This strategy ensures that in cases where a requested element is not available in memory, Tachiyomi can retrieve it from the disk cache.
+               </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">This approach, demonstrated in code housed within app/src/main/java/eu/kanade/tachiyomi/data/cache, showcases the app's sophisticated caching strategy aiming to optimize performance by leveraging both memory and disk-based caching mechanisms.
+               </p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig12.png" data-description="Use of LRU Cache">
+                  <img class="img_part" src="img/part3/nfig12.png">
+               </a>
+               <p>Use of LRU Cache</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">External storage</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi app requests permission for writing data in external storage, especifically to the Firebase service that the app uses. The rememberPermissionState method is imported from the Google permissions API to establish if the app has the required permissions to write on Firebase DB. This is used when the app saves the user’s downloaded data (like manga chapters or settings) as a backup to be able to restore the information later.</p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig13.png" data-description="Code snippet of writing in external storage request (presentation/permissions/PermissionRequestHelper.kt)">
+                  <img class="img_part" src="img/part3/nfig13.png">
+               </a>
+               <p>Code snippet of writing in external storage request (presentation/permissions/PermissionRequestHelper.kt)</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Preferences</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The Preferences storage mechanism is used to restore the data to which the backup was made. In fact, this mechanism is used along with the External Storage in the same file (SettingsDataScreen.kt). First, the app requests permissions using the requestStoragePermission imported method from the PermissionRequestHelper.kt file. Then, it saves the backed-up information using the other methods in the file, one example is when it retrieves the created backup and returns it as a Preference object using the Preferences mechanism in line 14 of the below image.</p>
+            </div>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part3/nfig14.png" data-description="Code snipppet of user’s data backup (presentation/more/settings/screen/SettingsDataScreen.kt)">
+                  <img class="img_part" src="img/part3/nfig14.png">
+               </a>
+               <p>Code snipppet of user’s data backup (presentation/more/settings/screen/SettingsDataScreen.kt)</p>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Persistent Data</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <ul>
+                  <li class="text">App-specific files: In the example of the manga chapters download, the data must be persisted since the app will ask for it later when one or many users want to download or have access to it from the app. Also, the information must be in a private space on disk, since other apps shouldn’t have access to the data downloaded and saved by the Tachiyomi app</li>
+                  <li class="text">External storage: In the case of the external storage use for saving the download information or settings of the user, it would be better if that kind of data is transient, since asking permissions to write on external storage some information from the user might be insecure or even inefficient if the data that is retrieved from the user is too much to be saved. </li>
+                  <li class="text">Preferences: As said earlier, in the case of the Preferences use for saving the download information or settings of the user, it would be better if that kind of data is transient, since writing and moving the user’s data to external storage can be an insecure feature or even an inefficient one in cases when the data saved by the user is too much.</li>
+               </ul>
+            </div>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="question">Identify and Evaluate threading/concurrency strategies of the third-party you are analyzing</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi utilizes various threading and concurrency strategies to ensure user experience and smooth performance. Alike, the main strategies and practices employed by Tachiyomi are the following:</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <ul>
+                  <li class="text">Asynchronous Operations: Tachiyomi uses asynchronous programming techniques to handle background tasks. By using Kotlin Coroutines, Tachiyomi performs non-blocking operations, such as fetching data from external sources without freezing the user interface. This ensures that the user can navigate along the app and perform actions while the app fetches data in the background.</li>
+                  <li class="text">Multithreading: Tachiyomi uses multithreading to manage concurrent tasks and processes. Allowing the application to execute multiple operations simultaneously, enhancing the apps performance and responsiveness. In addition, Tachiyomi employs multithreading to handle the loading of multiple images and for the fetching of the data in multiple sources.</li>
+                  <li class="text">Background Service Utilization: Tachiyomi utilizes background services to handle tasks that require continuous processing, these are updating the feeds, checking for new chapters and to perform sync operations. By using background services Tachiyomi can do these tasks without affecting the users current activities or consuming a lot of resources.</li>
+               </ul>
+            </div>
+            <h3 class="part-title" data-aos="fade-right">Thread Pool</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/a.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Tachiyomi makes use of various multi-threading and concurrency strategies to ensure smooth and efficient execution of tasks, particularly those related to network operations and search functionalities. One example of these are in the SearchScreenModel.kt file. This class primarily manages the search functionality within the app, encapsulating various operations used for the searching process of manga titles across different sources.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/b.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     The following code figures highlight the implementation of these strategies in Tachiyomi:
+                  </p>  
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig15.png" data-description="Figure 22 - Thread Pool Creation">
+                        <img class="img_part" src="img/part3/nfig15.png">
+                     </a>
+                     <p>Figure 22 - Thread Pool Creation</p>
+                  </div>   
+                  <p class="text">
+                     In the Figure 22, Tachiyomi creates a thread pool with a fixed capacity of 5 threads. The coroutineDispatcher facilitates the management of coroutines within the application, enabling concurrent processing of tasks within the specified thread pool.
+                  </p>  
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig16.png" data-description="Figure 23 - Search Function">
+                        <img class="img_part" src="img/part3/nfig16.png">
+                     </a>
+                     <p>Figure 23 - Search Function</p>
+                  </div>  
+                  <p class="text">Taking into account the Figure 2. The searchJob coroutine in Tachiyomi's search function utilizes the thread pool to perform network operations asynchronously. The async function manages concurrent tasks within the thread pool, allowing the application to fetch search results from different sources concurrently. Additionally, it facilitates the conversion of network results to local manga objects and updates the application state with the obtained results.</p>
+               </div>
+
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/c.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     The thread pool and concurrency strategies are primarily associated with the search functionality in Tachiyomi. These strategies enable the application to handle multiple network requests and processing tasks concurrently, ensuring a responsive user interface while fetching and managing data from various sources.
+                  </p>                  
+               </div>
+            </div> 
+            <h3 class="part-title" data-aos="fade-right">Asynchronous Processing</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/a.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Tachiyomi uses asynchronous programming models like Kotlin Coroutines to handle non-blocking operations. In the case of the app.kt file, the primarily operations used are data fetching, image loading, and handle of notifications without freezing the UI. 
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/b.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     The following code figures highlight the implementation of these strategies in Tachiyomi:
+                  </p>   
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig17.png" data-description="Figure 24 - Coroutine-based Concurrency">
+                        <img class="img_part" src="img/part3/nfig17.png">
+                     </a>
+                     <p>Figure 24 - Coroutine-based Concurrency</p>
+                  </div>          
+                  <p class="text">This figure demonstrates the use of coroutines to manage the incognito mode changes and corresponding notifications. It observes changes in the incognito mode preference and performs actions accordingly. When the incognito mode is enabled, it registers the ‘disableIncognitoReceiver’ and displays a notification to the user. When the incognito mode is disabled, it unregisters the receiver and cancels the notification.</p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig18.png" data-description="Figure 25 - Thread Pool Management">
+                        <img class="img_part" src="img/part3/nfig18.png">
+                     </a>
+                     <p>Figure 25 - Thread Pool Management</p>
+                  </div> 
+                  <p class="text">This figure establishes a fixed-size thread pool through the ‘Executors.newFixedThreadPool’ function, ensuring efficient management of concurrent tasks. Within the ‘newImageLoader’ function, it configures various dispatchers for tasks such as image fetching, decoding, and transformation. The limited parallelism ensures that these tasks are executed concurrently without overwhelming the system.</p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig19.png" data-description="Figure 26 - Asynchronous Network Operations">
+                        <img class="img_part" src="img/part3/nfig19.png">
+                     </a>
+                     <p>Figure 26 - Asynchronous Network Operations</p>
+                  </div> 
+                  <p class="text">The Figure above involves setting up TLS 1.3 support for devices with Android versions earlier than Android Q. It ensures the insertion of the Conscrypt provider to enable TLS 1.3 support. Additionally, it initializes the crash reporting feature through the ‘initAcra’ function and configures the notification channels using the ‘Notifications.createChannels’ method.</p>
+                  <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                     <a class="spotlight" href="img/part3/nfig20.png" data-description="Figure 27 - Asynchronous UI Updates">
+                        <img class="img_part" src="img/part3/nfig20.png">
+                     </a>
+                     <p>Figure 27 - Asynchronous UI Updates</p>
+                  </div> 
+                  <p class="text">This figure is responsible for setting the content intent within the notification setup, allowing users to interact with the notification content. It also sets up the ‘ImageLoader’ using Coil's ‘ImageLoader.Builder’, configuring the necessary parameters for efficient loading and displaying of images. The setup ensures smooth and responsive UI updates when handling image loading operations.</p> 
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/c.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Functionalities associated with each strategy:
+                  </p>   
+                  <div class="text-block" data-aos="fade-right" style="display: flex;">
+                     <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                        counter_1
+                     </span>
+                     <div style="width: 100%">
+                        <p class="text">
+                           Coroutine-based Concurrency: This strategy is associated with managing the application's lifecycle and handling asynchronous tasks related to user preferences, such as enabling/disabling the incognito mode and managing corresponding notifications.
+                        </p>                  
+                     </div>
+                  </div>    
+                  <div class="text-block" data-aos="fade-right" style="display: flex;">
+                     <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                        counter_2
+                     </span>
+                     <div style="width: 100%">
+                        <p class="text">
+                           Thread Pool Management: The thread pool management strategy is primarily linked with image loading and handling tasks related to image fetchers and decoders. It ensures efficient and parallel processing of image loading operations without causing UI freezes.
+                        </p>                  
+                     </div>
+                  </div> 
+                  <div class="text-block" data-aos="fade-right" style="display: flex;">
+                     <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                        counter_3
+                     </span>
+                     <div style="width: 100%">
+                        <p class="text">
+                           Asynchronous Network Operations: This strategy is associated with setting up TLS 1.3 support, initializing Acra for crash reporting, and configuring notification channels. These operations are crucial for maintaining the application's network connectivity and ensuring secure and reliable communication.
+                        </p>                  
+                     </div>
+                  </div> 
+                  <div class="text-block" data-aos="fade-right" style="display: flex;">
+                     <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                        counter_4
+                     </span>
+                     <div style="width: 100%">
+                        <p class="text">
+                           Asynchronous UI Updates: The asynchronous UI updates strategy is closely tied to the loading and displaying of images using Coil's ‘ImageLoader’. It enables the application to load and present images efficiently, contributing to a seamless and responsive user interface experience.
+                        </p>                  
+                     </div>
+                  </div>          
+               </div>
+            </div> 
+
+            <div class="text-block block" data-aos="fade-right" >
+               <h3>Audit Report</h3>
+               <div class="text-block block" data-aos="fade-right" style="display: flex; align-items: center;" >
+                  
+                  <p class="text" style="flex:1">Download Audit Report</p>
+                  <span onclick="location.href='files/AR_3.pdf'" class="material-symbols-outlined" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                     download
+                     </span>
+               </div>
+            </div>
+
+         </div>
+         <!--END PART 3-->
+
          
+
+         <!--PART 4-->
+         <div class="part_4" id="page4">
+            <h2 class="part-title" data-aos="fade-right">Part 4</h2>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 25-Nov-2023 (First Revision)</i></h7>
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Tachiyomi is a popular manga reader application that allows users to read manga on their mobile devices. Here are some scenarios that users might engage in while using the Tachiyomi app:</p>
+            </div>
+            <!--SCENARY 1-->
+            <h3 class="part-title">S<span class="material-symbols-outlined" style="font-size: 28pt !important; vertical-align: bottom; margin-bottom: 3px;">
+               counter_1
+            </span>: Browsing and Reading Manga</h3>
+            <div class="text-block" data-aos="fade-right" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+               <ul class="text-block" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+                  <li class="text">User Action: Open the Tachiyomi app.</li>
+                  <li class="text">System Response: Display the manga library with the mangas of the user.</li>
+                  <li class="text">User Action: Browse different manga categories (e.g., Popular, Latest, Genres).</li>
+                  <li class="text">System Response: Show a list of manga titles within the selected category.</li>
+                  <li class="text">User Action: Select a specific manga.</li>
+                  <li class="text">System Response: Present the manga pages with navigation options.</li>
+               </ul>
+            </div>
+            <h4 class="part-title">GPU Rendering Analysis</h4>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part4/nfig1.png" >
+                  <img class="img_part_shadow" src="img/part4/nfig1.png">
+               </a>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The provided GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <h5 class="part-title">Methods Breakdown:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The previous image about GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>RenderThread() (100%):</b> This represents the overall GPU rendering thread. The fact that it occupies 100% of the rendering time indicates that everything is executed within this thread.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>invokeDataAvailable() (10.33%):</b> This method is called and contributes to about 10.33% of the rendering time. It could be related to data availability or updating.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>get() (6.78%):</b> Within invokeDataAvailable(), the get() method is called and consumes 6.78% of the rendering time. This method typically involves retrieving data.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>notifyDataAvailable() (3.55%):</b> This method, called within invokeDataAvailable(), is responsible for notifying that data is available. It takes up 3.55% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>pos() (0.75%):</b> This method, called within notifyDataAvailable(), is responsible for determining or setting a position. It occupies 0.75% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_6
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>notifyOnFinished() (0.01%):</b> This method, called within invokeDataAvailable(), is responsible for notifying that a process has finished. It takes up a minimal 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Possible Issues:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>High Percentage in RenderThread:</b> The fact that the entire GPU rendering time is spent in RenderThread() might indicate a single-threaded or synchronous rendering process. This could lead to performance bottlenecks, especially on devices with multiple cores.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>InvokeDataAvailable Overhead:</b> The invokeDataAvailable() method and its sub-methods (get(), notifyDataAvailable(), pos(), notifyOnFinished()) collectively contribute to a significant portion of the rendering time. This suggests that data availability and notification mechanisms are consuming a notable amount of GPU resources.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Data Retrieval Overhead:</b> The get() method's relatively high percentage indicates that data retrieval might be a time-consuming operation. Consider optimizing data retrieval processes, perhaps through caching or asynchronous loading.
+                  </p>                  
+               </div>
+            </div>
+
+            <h5 class="part-title">Possible Improvements:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Multithreading:</b> Introducing multithreading allows the application to execute tasks concurrently, utilizing multiple CPU cores. Therefore, it  needs to identify tasks that can run independently and concurrently. For instance, separate UI rendering tasks from data retrieval operations. This can prevent one resource-intensive task from blocking the entire rendering process.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Async Operations:</b> Making data-related operations asynchronous ensures that the rendering thread doesn't get blocked while waiting for potentially time-consuming operations to complete.Taking into account this, Tachiyomi could refactor the get() method to perform data retrieval asynchronously, possibly using Kotlin's coroutines or other asynchronous programming patterns. This ensures that the rendering thread remains responsive during data fetch operations.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Caching Strategies:</b> Caching frequently used data helps reduce the need for repeated data retrieval, improving overall performance. In this way, Tachiyomi could Implement an efficient caching mechanism for frequently accessed data. This can involve in-memory caching for quick access and, if applicable, persistent caching to survive app restarts. Evaluate different caching strategies based on data access patterns.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Background Processing:</b> Moving non-rendering tasks, especially time-consuming ones like data retrieval, to background threads ensures a smooth user experience. Offload data retrieval tasks to background threads or services, allowing the rendering thread to focus on UI updates. Use Android's AsyncTask, Kotlin coroutines, or other background processing mechanisms to perform these tasks without impacting the main thread.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Profile and Test:</b> Continuous profiling and testing are essential for identifying further opportunities for optimization and ensuring the application's stability and responsiveness. Also, utilize profiling tools to monitor the application's performance, identify bottlenecks, and track the impact of implemented changes. Conduct thorough testing under various scenarios, including different device specifications and network conditions, to ensure optimal performance across a range of use cases.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Overdrawing</h5>
+            <div class="text-block block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" id="play_e1" onclick="overrideVideo('play_e1','E1_Over.webm')" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                  arrow_right
+                  </span>
+               <p class="text" style="flex:1">Watch Overdrawing E1 Video</p>
+            </div>
+            
+
+            <h5 class="part-title">Memory Management</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column; justify-content: center;">
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig2.png" >
+                  <img class="img_part_4" src="img/part4/nfig2.png">
+               </a>
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig3.png" >
+                  <img class="img_part_4" src="img/part4/nfig3.png">
+               </a>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In the previous graph we could see the memory management of the Tachiyomi app when the user is navigating between screens and in particular following the path of the first scenario. We see a rise in the memory allocated for the Native. The reason of this is because the scenario 1 needs of data processing and storage and access to external libraries where the manga is. Also, at the moment of refreshing the UI switching between screens and the increasing number of threads in another reason for this increase in the memory making it go from less than 500mb to more than 750mb in barely seconds. After the data retrieval is finished then the memory starts to decrease.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The garbage collector is called 6 times along this process but curiously every time it’s called the memory storage increases never decreases. Meaning that Tachiyomi every time is going to consume more memory calls the garbage collector. Also, the 3 almost simultaneously calls to the garbage collector give us an idea of a possible problem at the moment of using different sources of the app.</p>
+            </div>
+
+            <h5 class="part-title">Threading (110)</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig4.png" >
+                  <img class="img_part_4" src="img/part4/nfig4.png">
+               </a>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In this scenario, the deployment of 110 threads doesn't imply simultaneous execution or a direct impact on the main thread or UI. The complexity of this multithreading setup is driven by the crucial task of retrieving data from diverse external sources, especially when it involves multiple stages like gathering information and filtering down to the selected manga.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Within a multithreading architecture, threads collaborate to execute distinct tasks concurrently, including fetching and processing data, and updating the main thread or UI. The substantial thread count doesn't necessarily mean simultaneous execution; threads are instantiated, execute specific tasks, and then terminate upon completion. This dynamic thread management optimizes resource utilization and mitigates congestion.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The elevated thread count, illustrated by the 110 threads, results from the demanding process of extracting data from external sources. This involves multiple steps, each potentially executed on a separate thread for operational efficiency, such as initiating data requests and handling responses.</p>
+            </div>
+
+            <h5 class="part-title">Energy Consumption</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig5.png" >
+                  <img class="img_part_4" src="img/part4/nfig5.png">
+               </a>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The energy consumption during screen transitions and events in the first scenario is consistently low. While there are occasional peaks, they are brief and momentary. On average, the energy consumption remains stable at a very low level.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In addition to low energy consumption during screen transitions and events, the Tachiyomi app demonstrates an efficient use of internet resources. The application minimizes unnecessary data fetches, optimizing its internet consumption. By strategically managing data retrieval processes, the app ensures that network requests are streamlined and focused, contributing to a responsive and energy-efficient user experience. This dual emphasis on both energy and internet efficiency reflects the app's commitment to providing users with a smooth and resource-conscious manga reading experience.</p>
+            </div>
+            <!--END SCENARY 1-->
+
+            <!--SCENARY 2-->
+            <h3 class="part-title">S<span class="material-symbols-outlined" style="font-size: 28pt !important; vertical-align: bottom; margin-bottom: 3px;">
+               counter_2
+            </span>: Managing Manga Library</h3>
+            <div class="text-block" data-aos="fade-right" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+               <ul class="text-block" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+                  <li class="text">User Action: Open the Tachiyomi app.</li>
+                  <li class="text">System Response: Display the manga library with the mangas of the user.</li>
+                  <li class="text">User Action: Add a manga to the library.</li>
+                  <li class="text">System Response: Include the manga in the user's library for easy access.</li>
+               </ul><!--OK-->
+            </div>
+            <h4 class="part-title">GPU Rendering Analysis</h4>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part4/nfig1.png" >
+                  <img class="img_part_shadow" src="img/part4/nfig1.png">
+               </a>
+            </div> <!--OK-->
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The provided GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <h5 class="part-title">Methods Breakdown:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The previous image about GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>RenderThread():</b> 
+                     <ul>
+                        <li class="text">The RenderThread is consuming 100% of the rendering time, indicating that the entire rendering process occurs within this thread.</li>
+                        <li class="text">While it's expected for the rendering thread to be busy during UI updates, if this thread is consistently at 100%, it may indicate a lack of concurrency or potential bottlenecks.</li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>invokeDataAvailable()</b>
+                     <ul>
+                        <li class="text">This method is responsible for handling data availability.</li>
+                        <li class="text">The method contributes 6.54% to rendering time. Depending on the nature of data availability events, this might be an acceptable or high percentage. If this is called frequently, consider optimizing data processing or introducing asynchronous operations.</li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>notifyDataAvailable():</b>
+                     <ul>
+                        <li class="text">This method notifies that data is available for processing.</li>
+                        <li class="text">Consuming 4.51% of rendering time, it involves posting messages to the message queue. The high percentage may suggest that the application relies heavily on this mechanism. Optimizing the post() method might be beneficial.</li>
+                        <ul>
+                           <li class="text">
+                              <b>post():</b> 
+                              <ul>
+                                 <li class="text">Posting messages to the message queue.</li>
+                                 <li class="text">Consuming 4.51% of rendering time. Optimizing this method, especially its nested methods, could lead to performance improvements.</li>
+                                    <ul>
+                                       <li class="text"><b>sendMessageDelayed():</b>
+                                          <ul>
+                                             <li class="text">Sending delayed messages</li>
+                                             <li class="text">Consuming 4.50% of rendering time. If excessive delayed messages are sent, it might impact responsiveness.</li>
+                                          </ul>
+                                       </li>
+                                       <li class="text"><b>getPostMessage():</b>
+                                          <ul>
+                                             <li class="text">Retrieving a post message.</li>
+                                             <li class="text">Consuming 0.01% of rendering time. While a small percentage, it contributes to the overall processing time.</li>
+                                             <li class="text"><b>obtain()</b></li>
+                                             <ul>
+                                                <li class="text">Obtaining a message object. .</li>
+                                                <li class="text">Consuming 0.01% of rendering time. Although minor, optimizing object creation can have incremental benefits.</li>
+                                             </ul>
+                                          </ul>
+                                       </li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>get():</b> 
+                     <ul>
+                        <li class="text">Retrieving data.</li>
+                        <li class="text">Consuming 2.03% of rendering time. Depending on the frequency and nature of data retrieval, consider optimizing this method, especially if it involves network or disk operations.</li>
+                        <ul>
+                           <li class="text">
+                              <b>getReferent():</b>
+                              <ul>
+                                 <li>Getting the referent object.</li>
+                                 <li>Consuming 2.02% of rendering time. Optimizing referent object retrieval can be beneficial, especially if it involves complex operations.</li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>callOnFinished():</b> 
+                     <ul>
+                        <li class="text">Calling when the rendering process is finished.</li>
+                        <li class="text">Consuming only 0.01% of rendering time, indicating that the finishing process is relatively lightweight.</li>
+                        <ul>
+                           <li class="text">
+                              <b>post():</b>
+                              <ul>
+                                 <li class="text">Posting a message when rendering is finished.</li>
+                                 <li class="text">Consuming 0.01% of rendering time. This part seems to have a minimal impact on performance.</li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+
+            <h5 class="part-title">Possible Issues:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>RenderThread Saturation:</b> The RenderThread consistently operates at 100%, suggesting a potential lack of concurrency or presence of bottlenecks. That’s why it needs concurrency to allow multiple tasks to be executed simultaneously and optimize data processing within the RenderThread to alleviate potential bottlenecks
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>High Percentage in notifyDataAvailable() and post():</b> These methods contribute a significant percentage to rendering time, indicating heavy reliance on message posting mechanisms. Tachiyomi needs to optimize the mechanisms involved in message posting, such as reducing unnecessary notifications or improving the efficiency of handling data availability events. Also, evaluate the frequency of these events to ensure they align with application requirements.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>get() Method:</b> If data retrieval is frequent or involves significant processing, it might impact rendering performance. The app needs to optimize the data retrieval process, considering asynchronous operations to prevent the RenderThread from being blocked during data fetch operations. Assessing the possibility of implementing caching strategies to reduce the need for repeated data retrieval.
+                  </p>                  
+               </div>
+            </div>
+
+            <h5 class="part-title">Possible Improvements:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Concurrency Introduction:</b> 
+                     <ul>
+                        <li class="text">Introduce concurrency by identifying tasks that can be executed independently. This can potentially distribute the workload across multiple threads, preventing a single thread from saturating the RenderThread.</li>
+                        <li class="text">Optimize processing tasks within the RenderThread to reduce the time each task takes, improving the overall efficiency of the rendering process.</li>
+                        <li class="text">Investigate potential bottlenecks within the RenderThread and address them to enhance performance.</li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Message Posting Optimization:</b> 
+                     <ul>
+                        <li class="text">Review the necessity and frequency of data availability notifications. Optimize the mechanism to ensure that notifications are only sent when essential.</li>
+                        <li class="text">Improve the efficiency of the post() method to reduce the time spent in message posting. This may involve streamlining the process or identifying opportunities for optimization.</li>
+                        <li class="text">Consider asynchronous handling of data availability events to minimize their impact on rendering time.</li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Data Retrieval Optimization</b> 
+                     <ul>
+                        <li class="text">Optimize the data retrieval process within the get() method. Evaluate whether the method can be made asynchronous to avoid blocking the RenderThread during data fetch operations.</li>
+                        <li class="text">Explore caching strategies to store frequently used data, reducing the need for repeated data retrieval.</li>
+                        <li class="text">Assess the overall design and necessity of the get() method, considering potential improvements in data access patterns.</li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+            
+
+            <h5 class="part-title">Overdrawing</h5>
+            <div class="text-block block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" id="play_e2" onclick="overrideVideo('play_e2','E2_Over.webm')" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                  arrow_right
+                  </span>
+               <p class="text" style="flex:1">Watch Overdrawing E2 Video</p>
+            </div>
+            
+
+            <h5 class="part-title">Memory Management</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column; justify-content: center;">
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig7.png" >
+                  <img class="img_part_4" src="img/part4/nfig7.png">
+               </a>
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig8.png" >
+                  <img class="img_part_4" src="img/part4/nfig8.png">
+               </a>
+            </div> 
+
+            <h5 class="part-title">Threading (87)</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig9.png" >
+                  <img class="img_part_4" src="img/part4/nfig9.png">
+               </a>
+            </div> 
+
+         
+
+            <h5 class="part-title">Energy Consumption</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig10.png" >
+                  <img class="img_part_4" src="img/part4/nfig10.png">
+               </a>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In an environment devoid of peaks, the energy consumption throughout the entire scenario remains consistently constant. This sustained stability reflects Tachiyomi's dedication to maintaining a steady and low level of energy usage, contributing to an uninterrupted and energy-efficient manga reading experience. The absence of notable fluctuations in energy consumption underlines the app's commitment to providing users with a seamlessly optimized performance across different scenarios.</p>
+            </div>
+            <!--END SCENARY 2-->
+            <!--SCENARY 3-->
+            <h3 class="part-title">S<span class="material-symbols-outlined" style="font-size: 28pt !important; vertical-align: bottom; margin-bottom: 3px;">
+               counter_3
+            </span>: Customizing Reading Experience:</h3>
+            <div class="text-block" data-aos="fade-right" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+               <ul class="text-block" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+                  <li class="text">User Action: Open the Tachiyomi app.</li>
+                  <li class="text">System Response: Display the manga library with the mangas of the user.</li>
+                  <li class="text">User Action: Adjust reading settings (e.g., brightness, orientation, reading direction).</li>
+                  <li class="text">System Response: Apply the selected settings to enhance the reading experience.</li>
+                  <li class="text">User Action: Change reading modes (e.g., single page, double page).</li>
+                  <li class="text">System Response: Modify the display layout according to the selected mode.</li>
+               </ul>
+            </div>
+            <h4 class="part-title">GPU Rendering Analysis</h4>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part4/nfig11.png" >
+                  <img class="img_part_shadow" src="img/part4/nfig11.png">
+               </a>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The provided GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <h5 class="part-title">Methods Breakdown:</h5>
+            
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>RenderThread() (100%):</b> Represents the overall GPU rendering thread. It occupies 100% of the rendering time, indicating that all rendering operations are performed within this thread.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>onFrameCommit() (0.001%):</b> A method called within the RenderThread, contributing a negligible 0.001% to the rendering time. It likely involves actions related to committing frames.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>invokeDataAvailable() (9.68%):</b> This method, called within the RenderThread, contributes to about 9.68% of the rendering time. It might be associated with data availability or updating processes.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>notifyDataAvailable() (6.99%):</b> A sub-method called within invokeDataAvailable(). It is responsible for notifying that data is available and occupies 6.99% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>post() (6.96%):</b> A sub-method of notifyDataAvailable(), the post() method handles message posting. It contributes to 6.96% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_6
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>sendMessageDelayed() (6.94%):</b> A more specific sub-method within post(). It involves sending delayed messages and occupies 6.94% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_7
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>get() (0.01%):</b> A method called within invokeDataAvailable(), responsible for data retrieval. It consumes a minimal 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_8
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>getReferent() (0.01%):</b> A sub-method of get(), involved in obtaining a reference. It occupies 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_9
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>callOnFinished() (0.02%):</b> A method called within invokeDataAvailable(), responsible for indicating that a process has finished. It takes up a minimal 0.02% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; ">
+                  counter_1
+               </span>
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_0
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>requireNonNull() (0.01%):</b> A method called within callOnFinished(), involving the requirement of a non-null value. It occupies 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; ">
+                  counter_1
+               </span>
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>post() (0.01%):</b> Another instance of the post() method, called within callOnFinished(), contributing 0.01% to the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Possible Strengths:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Efficiency in Frame Commitment: </b>The onFrameCommit() method's minimal contribution suggests efficiency in handling frame commitments, which is crucial for smooth rendering.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Possible Issues:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>High Percentage in NotifyDataAvailable() and Post():</b> These methods, especially notifyDataAvailable() and its sub-methods, contribute significantly to rendering time. This may indicate potential inefficiencies in data availability notification and message posting mechanisms.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Data Retrieval Overhead:</b> The get() method, although minimal, involves data retrieval and might impact rendering performance.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Redundant Post() Calls:</b> Multiple instances of the post() method within different contexts might indicate redundancy.
+                  </p>                  
+               </div>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Nested Method Calls in invokeDataAvailable():</b> Multiple levels of method calls within invokeDataAvailable() may contribute to a significant portion of rendering time.
+                  </p>                  
+               </div>
+            </div>
+
+            <h5 class="part-title">Possible Improvements:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>High Percentage in NotifyDataAvailable() and Post():</b> Optimize the message posting process, considering whether the frequency of data availability events justifies their impact on rendering time. Implement asynchronous handling if applicable.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Data Retrieval Overhead:</b> Assess the necessity and frequency of data retrieval within the rendering thread. Optimize data retrieval processes, and consider asynchronous operations to prevent blocking the RenderThread
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Redundant Post() Calls:</b> Review the necessity of each post() call, eliminating redundancy, and optimizing the message posting mechanism.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Nested Method Calls in invokeDataAvailable():</b> Evaluate the hierarchy of method calls within invokeDataAvailable() and optimize the structure to reduce overhead.
+                  </p>                  
+               </div>
+            </div> 
+            
+
+            <h5 class="part-title">Overdrawing</h5>
+            <div class="text-block block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" id="play_e3" onclick="overrideVideo('play_e3','E3_Over.webm')" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                  arrow_right
+                  </span>
+               <p class="text" style="flex:1">Watch Overdrawing E4 Video</p>
+            </div>
+            
+
+            <h5 class="part-title">Memory Management</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column; justify-content: center;">
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig12.png" >
+                  <img class="img_part_4" src="img/part4/nfig12.png">
+               </a>
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig13.png" >
+                  <img class="img_part_4" src="img/part4/nfig13.png">
+               </a>
+            </div> 
+
+            <h5 class="part-title">Threading (60)</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig14.png" >
+                  <img class="img_part_4" src="img/part4/nfig14.png">
+               </a>
+            </div> 
+
+
+            <h5 class="part-title">Energy Consumption</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig15.png" >
+                  <img class="img_part_4" src="img/part4/nfig15.png">
+               </a>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The energy usage during transitions and events in the first scenario consistently remains low. There is no kind of significant peak, contributing to a smooth and uninterrupted user interface. On average, the energy consumption level stays stable and minimal, ensuring an overall seamless user experience.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">Additionally, Tachiyomi adeptly manages internet resources without experiencing any kind of peak. The app minimizes unnecessary data retrievals, optimizing overall internet consumption. Smart data retrieval processes ensure streamlined network requests, enhancing efficiency in both energy and internet usage. This commitment reflects the app's dedication to providing users with an optimized manga reading experience. Importantly, no significant peak is observed throughout the entire scenario.</p>
+            </div>
+            <!--END SCENARY 3-->
+            <!--SCENARY 4-->
+            <h3 class="part-title">S<span class="material-symbols-outlined" style="font-size: 28pt !important; vertical-align: bottom; margin-bottom: 3px;">
+               counter_4
+            </span>: Discovering New Manga</h3>
+            <div class="text-block" data-aos="fade-right" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+               <ul class="text-block" style="padding-top: 0 !important; padding-bottom: 0 !important; ">
+                  <li class="text">User Action: Open the Tachiyomi app.</li>
+                  <li class="text">System Response: Display the manga library with the mangas of the user.</li>
+                  <li class="text">User Action: Search for a specific manga title.</li>
+                  <li class="text">System Response: Display search results matching the entered query.</li>
+                  <li class="text">User Action: Filter for the chapter that has not been read.</li>
+                  <li class="text">System Response Shows the chapters of the manga that matches the query.</li>
+               </ul>
+            </div>
+            <h4 class="part-title">GPU Rendering Analysis</h4>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" href="img/part4/nfig16.png" >
+                  <img class="img_part_shadow" src="img/part4/nfig16.png">
+               </a>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">
+                  The provided GPU rendering analysis focus on the methods and their respective percentages of execution time in the RenderThread. Let's break down the information and discuss potential implications:
+               </p>
+            </div>
+            <h5 class="part-title">Methods Breakdown:</h5>
+            
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>RenderThread() (100%):</b> Represents the overall GPU rendering thread. It occupies 100% of the rendering time, indicating that all rendering operations are performed within this thread.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>invokeDataAvailable() (5.25%):</b> A method called within the RenderThread, contributing to about 5.25% of the rendering time. It might be associated with data availability or updating processes.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>get() (3.53%):</b> A sub-method called within invokeDataAvailable(), responsible for data retrieval. It consumes 3.53% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>getReferent() (3.49%):</b> A sub-method called within invokeDataAvailable(). It is responsible for notifying that data is available and occupies 6.99% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>notifyDataAvailable() (0.53%):</b> A method called within invokeDataAvailable(). It is responsible for notifying that data is available and occupies 0.53% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_6
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>post() (0.51%):</b> A sub-method of notifyDataAvailable(), the post() method handles message posting. It contributes to 0.51% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_7
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>sendMessageDelayed() (0.50%):</b> A more specific sub-method within post(). It involves sending delayed messages and occupies 0.50% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_8
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>getPostMessage() (0.01%):</b> A sub-method called within post(), responsible for obtaining posted messages. It occupies 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_9
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>obtain() (0.01%):</b> A method called within getPostMessage(), involving the obtaining of a message. It occupies 0.01% of the rendering time.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Possible Strengths:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Efficient Data Retrieval:  </b>The get() method, including getReferent(), consumes a significant portion of rendering time, indicating efficient data retrieval processes.
+                  </p>                  
+               </div>
+            </div> 
+
+            <h5 class="part-title">Possible Issues:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Nested Method Calls in invokeDataAvailable():</b> Multiple levels of method calls within invokeDataAvailable() may contribute to a significant portion of rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Relatively High Percentage in NotifyDataAvailable() and Post():</b> Although relatively low, the notifyDataAvailable() and post() methods contribute to rendering time.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Specific Sub-Methods with Low Contribution:</b> Methods like getPostMessage() and obtain() have a minimal impact on rendering time but may add complexity.
+                  </p>                  
+               </div>
+            </div>
+            
+            <h5 class="part-title">Possible Improvements:</h5>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Nested Method Calls in invokeDataAvailable():</b> Evaluate the hierarchy of method calls within invokeDataAvailable() and optimize the structure to reduce overhead.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Relatively High Percentage in NotifyDataAvailable() and Post():</b> Review the necessity of each call, optimizing the message posting process, and considering asynchronous handling if applicable.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Specific Sub-Methods with Low Contribution:</b> Assess the necessity of such specific sub-methods and consider simplifying or optimizing the message handling process.
+                  </p>                  
+               </div>
+            </div> 
+            
+
+            <h5 class="part-title">Overdrawing</h5>
+            <div class="text-block block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" id="play_e4" onclick="overrideVideo('play_e4','E4_Over.webm')" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                  arrow_right
+                  </span>
+               <p class="text" style="flex:1">Watch Overdrawing E4 Video</p>
+            </div>
+            
+
+            <h5 class="part-title">Memory Management</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column; justify-content: center;">
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig17.png" >
+                  <img class="img_part_4" src="img/part4/nfig17.png">
+               </a>
+               <a class="spotlight"  style="text-align: center;" href="img/part4/nfig18.png" >
+                  <img class="img_part_4" src="img/part4/nfig18.png">
+               </a>
+            </div> 
+
+            <h5 class="part-title">Threading (60)</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig19.png" >
+                  <img class="img_part_4" src="img/part4/nfig19.png">
+               </a>
+            </div> 
+
+
+            <h5 class="part-title">Energy Consumption</h5>
+            <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+               <a class="spotlight" style="text-align: center;" href="img/part4/nfig20.png" >
+                  <img class="img_part_4" src="img/part4/nfig20.png">
+               </a>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">The energy consumption during screen transitions and events in the first scenario remains consistently low. While there are occasional peaks, they are brief and momentary. On average, the energy consumption level stays stable and very low. This energy efficiency contributes to an overall smooth and responsive user experience.</p>
+            </div>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <p class="text">In addition to the efficient energy management during screen transitions and events, the Tachiyomi app exhibits a judicious use of internet resources. The application minimizes unnecessary data fetches, optimizing its internet consumption. By strategically handling data retrieval processes, the app ensures that network requests are streamlined and focused, contributing to a responsive and energy-efficient user experience. This dual emphasis on both energy and internet efficiency reflects the app's commitment to providing users with a smooth and resource-conscious manga reading experience. Notably, only one significant peak is identified throughout the entire scenario, occurring when applying filters to read manga.</p>
+            </div>
+            <!--END SCENARY 4-->
+
+            <h2 class="part-title">Micro Optimization</h2>
+            <h3 class="part-title">Micro-optimization Strategies</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_1
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Caching Custom Covers:</b>
+                     <ul>
+                        <li class="text">
+                           <b>Micro-optimization:</b>
+                           <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                              <a class="spotlight" style="text-align: center;" href="img/part4/nfig21.png" >
+                                 <img class="img_part_4" src="img/part4/nfig21.png">
+                              </a>
+                           </div> 
+                        </li>
+                        <li class="text">
+                           <b>Location: </b>Found in `MangaKeyer` class in the `key` function.
+                        </li>
+                        <li class="text">
+                           <b>Reason: </b>This is a micro-optimization as it optimizes the key generation process for Coil image loading library. If a manga has a custom cover, it uses the manga ID along with the cover's last modified timestamp as the key. Otherwise, it uses the thumbnail URL along with the last modified timestamp. This ensures unique keys for custom and non-custom covers, improving cache utilization.
+                        </li>
+                        <li class="text">
+                           <b>Purpose: </b>The purpose is to distinguish between manga with custom covers and those without, ensuring that Coil's image cache is used efficiently by providing distinct keys based on the cover type.
+                        </li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_2
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Custom Cover File Existence Check:</b> 
+                     <ul>
+                        <li class="text">
+                           <b>Micro-optimization:</b>
+                           <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                              <a class="spotlight" style="text-align: center;" href="img/part4/nfig22.png" >
+                                 <img class="img_part_4" src="img/part4/nfig22.png">
+                              </a>
+                           </div> 
+                        </li>
+                        <li class="text">
+                           <b>Location: </b>Located in the `MangaCoverKeyer` class in the `key` function.
+                        </li>
+                        <li class="text">
+                           <b>Reason: </b>This is a micro-optimization as it optimizes key generation based on the existence of a custom cover file. If the file exists, it uses the manga ID along with the cover's last modified timestamp as the key. Otherwise, it uses the cover URL along with the last modified timestamp. This avoids unnecessary file I/O operations and ensures that the correct key is generated based on the cover's availability.
+                        </li>
+                        <li class="text">
+                           <b>Purpose: </b>The purpose is to efficiently check for the existence of a custom cover file before generating a key, reducing unnecessary file system access and improving key generation speed.
+                        </li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_3
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>FastScrollLazyVerticalGrid:</b> 
+                     <ul>
+                        <li class="text">
+                           <b>Micro-optimization:</b>
+                           <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                              <a class="spotlight" style="text-align: center;" href="img/part4/nfig23.png" >
+                                 <img class="img_part_4" src="img/part4/nfig23.png">
+                              </a>
+                           </div> 
+                        </li>
+                        <li class="text">
+                           <b>Location: </b>Located in the LazyLibraryGrid file, where FastScrollLazyVerticalGrid is used instead of the standard LazyVerticalGrid.
+                        </li>
+                        <li class="text">
+                           <b>Reason: </b>This is a micro-optimization focusing on scrolling performance. The FastScrollLazyVerticalGrid is likely optimized for efficient scrolling behavior, providing a smoother user experience, especially in scenarios with a large number of items.
+                        </li>
+                        <li class="text">
+                           <b>Purpose: </b>The purpose is to enhance the scrolling experience within the LazyGrid by utilizing a specialized implementation (FastScrollLazyVerticalGrid) that is designed for improved performance.
+                        </li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_4
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>Dispatcher Optimization:</b>
+                     <ul>
+                        <li class="text">
+                           <b>Micro-optimization:</b>
+                           <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                              <a class="spotlight" style="text-align: center;" href="img/part4/nfig24.png" >
+                                 <img class="img_part_4" src="img/part4/nfig24.png">
+                              </a>
+                           </div> 
+                        </li>
+                        <li class="text">
+                           <b>Location: </b>Located in the AndroidDatabaseHandler class.
+                        </li>
+                        <li class="text">
+                           <b>Reason: </b>This is considered a micro-optimization as it allows for the fine-tuning of coroutine execution contexts, ensuring that certain operations are dispatched on appropriate threads. It optimizes resource utilization and responsiveness.
+                        </li>
+                        <li class="text">
+                           <b>Purpose: </b>The purpose is to optimize coroutine execution by providing specific dispatchers (Dispatchers.IO by default) for query and transaction operations, enhancing concurrency and minimizing thread contention.
+                        </li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <span class="material-symbols-outlined" style="font-size: 20pt; margin-right: 10px;">
+                  counter_5
+               </span>
+               <div style="width: 100%">
+                  <p class="text">
+                     <b>ThreadLocal Optimization:</b>
+                     <ul>
+                        <li class="text">
+                           <b>Micro-optimization:</b>
+                           <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
+                              <a class="spotlight" style="text-align: center;" href="img/part4/nfig25.png" >
+                                 <img class="img_part_4" src="img/part4/nfig25.png">
+                              </a>
+                           </div> 
+                        </li>
+                        <li class="text">
+                           <b>Location: </b>Located in the AndroidDatabaseHandler class.
+                        </li>
+                        <li class="text">
+                           <b>Reason: </b>It's a micro-optimization because it allows for thread-local storage of transaction IDs, avoiding conflicts in multi-threaded scenarios. Each thread has its own suspendingTransactionId.
+                        </li>
+                        <li class="text">
+                           <b>Purpose: </b>The purpose is to ensure that suspending transactions have a unique identifier per thread, preventing interference between transactions executed on different threads.
+                        </li>
+                     </ul>
+                  </p>                  
+               </div>
+            </div> 
+
+            <h3 class="part-title">Potential Optimization:</h3>
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/a.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Ensure that the `coverCache.getCustomCoverFile(data.mangaId)` operation is efficiently implemented to minimize file system access, as frequent file I/O operations can impact performance.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/b.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Optimize the `coverCache.get()` operation to efficiently retrieve cover images from the cache, potentially implementing caching strategies like memory caching for quicker access.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/c.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     If there are complex UI components within the LazyGrid items, it will be a good idea to optimize their rendering logic, such as using remember for expensive calculations or utilizing Modifier.drawWithCache for caching.
+                  </p>                  
+               </div>
+            </div> 
+            <div class="text-block" data-aos="fade-right" style="display: flex;">
+               <img style="height: 25px; width: 25px;margin-right: 8px; margin-top: 2px;" src="img/letters/d.svg">
+               <div style="width: 100%">
+                  <p class="text">
+                     Customize coroutine dispatchers for queryDispatcher and transactionDispatcher based on specific application needs.
+                  </p>                  
+               </div>
+            </div> 
+
+            <div class="text-block block" data-aos="fade-right" >
+               <h3>Audit Report</h3>
+               <div class="text-block block" data-aos="fade-right" style="display: flex; align-items: center;" >
+                  
+                  <p class="text" style="flex:1">Download Audit Report</p>
+                  <span onclick="location.href='files/AR_3.pdf'" class="material-symbols-outlined" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                     download
+                     </span>
+               </div>
+            </div>
+         </div>
+         <!--END PART 4-->
+         <div class="end-page" id="end-page">
+         
+            <div data-aos="fade-right" style="display: flex; height: 50px; align-items: center; justify-content: center;">
+               <img src="img/logo.svg">
+            </div>
+            <h4 data-aos="fade-right">App-Report Made By:</h4>
+            <p data-aos="fade-right">Daniel Fernando Gómez-Barrera</p>
+            <p data-aos="fade-right">Daniel Andrés Bernal Cáceres</p>
+            <h4 data-aos="fade-right">Special Thanks to:</h4>
+            <p data-aos="fade-right">Juan Pablo Martinez Pineda for his contribution with the 1st, 2nd and 3rd part of this report.</p>
+            <p data-aos="fade-right">Mario Linares for his invaluable assistance and extensive knowledge shared with us throughout the entire semester</p>
+            <h4 data-aos="fade-right">Legal Note</h4>
+         <p data-aos="fade-right" style="text-align: center;">
+            We are not developers of the Tachiyomi App.<br>
+            This educational report has been created for the Construcción de Aplicaciones Móviles class at Universidad de los Andes.<br>
+            The content is distributed under the MIT license, and the code can be found at <a href="https://github.com/danielfgmb/AppReport4" target="_blank">https://github.com/danielfgmb/AppReport4</a>.
+         </p>
+         </div>
          
       </div>
       
       <svg class="svg-animation" id="lineContainer" style="z-index: -98; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;"></svg>
+      <svg class="svg-animation" id="lineContainer2" style="z-index: -98; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;"></svg>
       <div id="back_ball" style="z-index: -99; position: fixed;width: 180vh;height: 150vh; bottom: -50vh;right: -50vh;background: radial-gradient(closest-side,#b3bafa, #fff);">
       </div>
       <script>
          const showing = false
+         var i_page = 0
+         var navigator_visible = false
+         var animation_in_progress = false
           animation_xd('#back_ball');
          random_perspective('#rotation');
 
@@ -366,19 +2860,116 @@ Furthermore, developers have the opportunity to enhance the "sources" and "exten
          circle.setAttribute('r', 2);
          lineContainer.appendChild(circle);
 
-const cant_figs = 16
-         
+
+         const svgNS2 = "http://www.w3.org/2000/svg";
+         const line2 = document.createElementNS(svgNS2, 'line');
+         const circle2 = document.createElementNS(svgNS2, 'circle');
+         line2.setAttribute('stroke', 'black');
+         lineContainer2.appendChild(line2);
+         circle2.setAttribute('r', 2);
+         lineContainer2.appendChild(circle2);
+
+const cant_figs = 34
+var phone_visible = true
+var video2visible = false
 $(function () {
   $(window).scroll(function () {
 
-      let height_middle = window.innerHeight/2;
-      var scroll_position = $(window).scrollTop();
+     
+
+      if(video2visible){
+         hideVideo()
+      }
+
+
+
+   let height_middle = window.innerHeight/2;
+   var scroll_position = $(window).scrollTop();
+   var part4_position = $('#page4').position();
+   
+   //console.log(part4_position.top,"<",scroll_position-window.innerHeight)
+   console.log(scroll_position,">",$('#page2').position().top )
+
+   if(scroll_position+ window.innerHeight>=$('#end-page').position().top ){
+      if(navigator_visible){
+            navigator_visible = false
+            invisible_navigator()
+         }
+   }  
+   else if(scroll_position+10>=$('#page4').position().top ){
+      if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      if(i_page != 4){
+         i_page = 4
+         set_navigator(i_page)
+         if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      }
+   }   
+
+   else if ( scroll_position+10>=$('#page3').position().top) {
+      if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      if(i_page != 3){
+         i_page = 3
+         set_navigator(i_page)
+         if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      }
+   } 
+
+   else if ( scroll_position+10>=$('#page2').position().top) {
+      if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      if(i_page != 2){
+         i_page = 2
+         set_navigator(i_page)
+         
+      }
+      
+   } 
+   else if (scroll_position+10>=$('#page1').position().top ) {
+      if(!navigator_visible){
+            navigator_visible = true
+            visible_navigator()
+         }
+      if(i_page != 1){
+         i_page = 1
+         set_navigator(i_page)
+         
+      }
+   } 
+   else{
+         if(navigator_visible){
+            navigator_visible = false
+            invisible_navigator()
+         }
+      
+   }
+
+   if(phone_visible){
+      
+      if(part4_position.top-window.innerHeight<scroll_position){
+         invisible_phone();
+         phone_visible = false;
+      }
+      
       var selected = false;
       let i = cant_figs;
       for(i=cant_figs; i>0; i--){
-         console.log('#fig'+i+'span',cant_figs,i)
+         //console.log('#fig'+i+'span',cant_figs,i)
          var rect = $('#fig'+i+'span').position();
-         console.log(rect.top,"<",height_middle+scroll_position)
+         //console.log(rect.top,"<",height_middle+scroll_position)
          if (rect.top < height_middle+scroll_position && rect.top > scroll_position){
             selected=true;
             highlightText(i)
@@ -398,6 +2989,14 @@ $(function () {
             unHighlightText(j)
          }
       }
+   } else{
+
+      if(part4_position.top- window.innerHeight>scroll_position){
+         visible_phone();
+         phone_visible=true;
+      }
+
+   }
    
       
       
@@ -407,6 +3006,60 @@ $(function () {
       
   });
 });
+
+function visible_phone(){
+   $('#fixed1').fadeIn('fast', function () {
+      });
+}
+
+function invisible_phone(){
+   $('#fixed1').fadeOut('fast', function () {
+      });
+}
+
+pages = ['<b>Part 1:</b> App Overview', '<b>Part 2: </b> Architecture, UI/UX & Dependencies', '<b>Part 3:</b>  EC, Caching & Multithreading','<b>Part 4:</b> Performance']
+
+function set_navigator(i){
+   $("#navigator_text").fadeOut(400, function() {
+      $(this).html(pages[i-1]).fadeIn(400);
+   });
+}
+
+function goBack(){
+   if(i_page-1>0){
+      scrollToAnchor('#page'+(i_page-1))
+   }
+   if(i_page-1==0){
+      scrollToAnchor('#intro-page')
+   }
+}
+
+function goToMe(){
+   if(i_page>0 && i_page<=4){
+      scrollToAnchor('#page'+(i_page))
+   }
+}
+
+
+function goNext(){
+   if(i_page+1<=4){
+      scrollToAnchor('#page'+(i_page+1))
+   }
+   if(i_page+1==5){
+      scrollToAnchor('#end-page')
+   }
+}
+
+
+function visible_navigator(){
+   $('#navigator').fadeIn('fast', function () {
+      });
+}
+
+function invisible_navigator(){
+   $('#navigator').fadeOut('fast', function () {
+      });
+}
 
 function highlightText(i){
    $('#fig'+i+'span').css(
@@ -462,6 +3115,58 @@ function overrideFigure(i){
    }
 }
 
+function overrideVideo(id, name){
+   video2visible = true
+   
+   $("#fixed2").fadeIn('fast', function () {});
+   $("#lineContainer2").fadeIn('fast', function () {});
+   updateLinePos(id)
+   var video = $("#app-video");
+
+   video.fadeOut('fast', function () {
+      video.attr('src', 'vids/'+name);
+      video.fadeIn('fast',
+      function () {
+         video.play()
+      }
+      );
+      
+   }); 
+
+   
+}
+
+function hideVideo(){
+   video2visible = false
+   $("#fixed2").fadeOut('fast', function () {});
+   $("#lineContainer2").fadeOut('fast', function () {});
+   
+}
+
+function updateLinePos(id){
+   let movingElementId = id
+   const stationaryElement = document.getElementById('phone2');
+   const movingElement = document.getElementById(movingElementId);
+   
+    const stationaryRect = stationaryElement.getBoundingClientRect();
+    const movingRect = movingElement.getBoundingClientRect();
+
+    const stationaryX = stationaryRect.left + (stationaryRect.width / 2);
+    const stationaryY = stationaryRect.top + (stationaryRect.height / 2);
+
+    const movingX = movingRect.right;
+    const movingY = movingRect.top + movingRect.height / 2;
+
+    line2.setAttribute('x2', stationaryX);
+    line2.setAttribute('y2', stationaryY);
+    line2.setAttribute('x1', movingX);
+    line2.setAttribute('y1', movingY);
+    circle2.setAttribute('cx', movingX);
+    circle2.setAttribute('cy', movingY);
+}
+
+
+
 function updateLine(i) {
    let movingElementId = 'fig'+i+'span'
    const stationaryElement = document.getElementById('phone');
@@ -485,6 +3190,7 @@ function updateLine(i) {
     circle.setAttribute('cy', movingY);
   }
       </script>
+      <script>hljs.highlightAll();</script>
       </div>
        
    </body>
