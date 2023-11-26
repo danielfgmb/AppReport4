@@ -1,0 +1,93 @@
+img{
+  width: 100%;
+  height: 100%;;
+}
+
+ p{
+  margin: 0 !important;
+}
+
+body, div{
+  box-sizing: border-box;
+  margin: 0;
+}
+.page{
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro-page{
+  height: 100vh;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* styles.css */
+.phone-frame {
+  position: absolute;
+    perspective: 1000px; /* Perspective for 3D effect */
+    left: 50%;
+    top: 50%;
+transform: translate(-50%, -50%);
+object-fit: contain;
+    
+  }
+  .screen {
+    position: relative;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 478px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.353); /* Simulate phone shadow */
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    border-top: 17px solid whitesmoke;
+    border-bottom: 17px solid whitesmoke;
+    border-left:  8px solid whitesmoke;
+    border-right: 8px solid whitesmoke;
+    background-color: whitesmoke;
+    
+  }
+
+  .screen_upper {
+    position: absolute;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 478px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    border-top: 17px solid whitesmoke;
+    border-bottom: 17px solid whitesmoke;
+    border-left:  8px solid whitesmoke;
+    border-right: 8px solid whitesmoke;
+  }
+  .screen_upper2 {
+    position: absolute;
+    top:0;
+    width: 216px; /* Adjust dimensions based on your design */
+    height: 478px !important; /* Adjust dimensions based on your design */
+    transform-style: preserve-3d;
+    border-radius: 20px;
+    border-top-left-radius: 20px 20px;
+    box-shadow: 0 0 5px #aaa inset;
+  }
+  .rotation_xd{
+    transition: all 1s ease-in;
+    transform-style: preserve-3d;
+    transform: rotateY(-18deg) rotateX(5deg); /* Adjust perspective angle */  
+  }
+  
+  
+  #app-image {
+    width: 200px; /* Adjust dimensions based on your design */
+    height: 444px !important; /* Adjust dimensions based on your design */
+    object-fit: contain; /* Ensure image fits inside the screen */
+    border-radius: 10px;;
+    
+    box-shadow: 0 0 1px #aaa inset;
+  }
+  
