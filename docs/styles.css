@@ -7,10 +7,38 @@ img{
   margin: 0 !important;
 }
 
-body{
-  /*overflow: hidden;*/
+
+
+
+#block_non_mobile{
+  
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: white;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999999999999;
+  display: none !important;
 }
 
+@media only screen and (max-height: 500px) {
+  #block_non_mobile {
+    display: flex !important;
+  }
+  body{
+    overflow: hidden;
+  }
+}
+@media only screen and (max-width: 750px) {
+  #block_non_mobile {
+    display: flex !important;
+  }
+  body{
+    overflow: hidden;
+  }
+}
 
 
 body, div{
@@ -32,12 +60,15 @@ body, div{
 }
 
 .end-page{
-  height: 100vh;
-  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh !important;
+  width: 100% !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  white-space: pre !important;
 }
 
 .part{

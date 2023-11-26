@@ -28,8 +28,20 @@
    <body>
       <script>
          //AOS.init();     
-
+         if($(window).scrollTop()<10){
+            console.log("XD",$(window).scrollTop())
+           // $('body').css('overflow','hidden')
+         }
        </script>
+       <div id="block_non_mobile">
+         <div data-aos="fade-right" style="display: flex; height: 50px; align-items: center; justify-content: center;">
+            <img src="img/logo.svg">
+            <img style="margin-left: 10px;" src="img/sad.png">
+         </div>
+         <h3 data-aos="fade-right" style="text-align: center;">Your screen size<br> is too small</h3>
+         <p data-aos="fade-right" style="text-align: center;">Please consider using another device.</p>
+         <p data-aos="fade-right" style="text-align: center;">Alternatively, try reducing the zoom level in your browser.<br>This content is optimized for computer screens.</p>
+      </div>
       <div class="page" >
          <!--NAVIGATOR-->
          <style>
@@ -165,19 +177,32 @@
                Start Presentation
                </div>
              
-             <button id="tt4" onclick="location.href='https://github.com/tachiyomiorg/tachiyomi';" style="margin: 15px; margin-left: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+             <button id="tt4" onclick="location.href='https://github.com/tachiyomiorg/tachiyomi';" style="margin: 15px;margin-right: 5px; margin-left: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
                <i class="fa-brands fa-github"></i>
              </button>
              <div class="mdl-tooltip" for="tt4">
                Link to Tachiyomi Git Repo
                </div>
+
+               <button id="tt6" onclick="location.href='files/AppReport.pdf'" style="margin: 15px; margin-left: 5px; background: #40467c; box-shadow: none;"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+                  <i class="material-icons">download</i>
+                </button>
+                <div class="mdl-tooltip" for="tt6">
+                  Donwload PDF Version
+                  </div>
              </div>
+
+             
          </div>
          <!--PART 1-->
          <div class="part" id="page1">
 
             <h2 class="part-title" data-aos="fade-right">Part 1</h2>
-            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 23-Sep-2023 (Feedback revisions completed)</i></h7>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 23-Sep-2023 <span id="fb_p1" style="cursor: pointer; text-decoration: underline;">(Feedback revisions completed)</span></i></h7>
+            <div class="mdl-tooltip" for="fb_p1">
+               Improve sentence completeness mistakes<br>
+               Corrections to the BQs, improving explanations and explicitly explain why each one enters on the classification
+            </div>
             <div class="text-block" data-aos="fade-right">
             <p class="question">Describe the app you chose thoroughly. What is/are its core functionalities? What do you think is their revenue model? How many downloads does it have? What do you find interesting about it?</p>
             </div>
@@ -453,7 +478,13 @@
          <!--PART 2-->
          <div class="part" id="page2">
             <h2 class="part-title" data-aos="fade-right">Part 2</h2>
-            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 24-Nov-2023 (Feedback revisions completed)</i></h7>
+            <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 24-Nov-2023 <span id="fb_p2" style="cursor: pointer; text-decoration: underline;">(Feedback revisions completed)</span></i></h7>
+            <div class="mdl-tooltip" for="fb_p2">
+               Create sub-section in the UI/UX section that includes what we like in terms of the UI/UX design<br>
+               General Improvements to UI/UX section<br>
+               Improve the libraries section including how some of them are implemented in Tachiyomi and how the app uses them.</li>
+               
+            </div>
             <div class="text-block" data-aos="fade-right">
                <p class="question">Use your knowledge in design patterns and architecture patterns to analyze the ones used in the app. You must include snippets of code that proves what you are saying.</p>
             </div>
@@ -1165,10 +1196,10 @@ implementation(libs.leakcanary.plumber)
             <h2 class="part-title" data-aos="fade-right">Part 3</h2>
             <h7 class="part-title" data-aos="fade-right"><i class="fa-solid fa-clock"></i>  <i>Last Update: 24-Nov-2023 <span id="fb_p3" style="cursor: pointer; text-decoration: underline;">(Feedback revisions completed)</span></i></h7>
             <div class="mdl-tooltip" for="fb_p3">
-               - Caching Strategies: Include snippets of code of the first strategy.<br>
-               - Caching Strategies: Include the average amount of cache storage used by Tachiyomi<br>
-               - Memory management strategies: Mentions the data structures used, as well management<br> of weak references, garbage collector, image caching, general strategy of caching and improves <br>the explanation in each snippet of code.</li>
-               </ul>
+               Caching Strategies: Include snippets of code of the first strategy.<br>
+               Caching Strategies: Include the average amount of cache storage used by Tachiyomi<br>
+               Memory management strategies: Mentions the data structures used, as well management of weak references, garbage collector, image caching, general strategy of caching and improves the explanation in each snippet of code.</li>
+               
             </div>
             <div class="text-block" data-aos="fade-right" style="display: flex;">
                <p class="question">Identify good/bad Eventual connectivity (ECn) strategies in the third-party app</p>
@@ -1784,6 +1815,19 @@ implementation(libs.leakcanary.plumber)
                   </span>
                <p class="text" style="flex:1">Watch Overdrawing E1 Video</p>
             </div>
+            <div class="text-block">
+               <p class="text">
+                  <ul>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 102, 0, 0.42)">Orange - Buffer Swap Stage:</span> Represents the time the CPU waits for the GPU to finish its work. A prolonged bar suggests that the GPU processing in the app is overly intensive.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 0, 0, 0.42)">Red - Command Issue Stage:</span> Depicts the time Android's 2D renderer takes to send commands to OpenGL for drawing and redrawing display lists. The height of this bar is directly proportional to the sum of the time it takes to execute each display list (a greater number of display lists results in a longer red bar).</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 179, 255, 0.42)">Light blue - Sync and Load Stage:</span> Reflects the time needed to upload bitmap information to the GPU. A lengthy segment indicates that the app takes considerable time to load a significant amount of graphics.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 42, 255, 0.42)">Blue - Drawing Stage:</span> Illustrates the time used to create and update view display lists. If this part of the bar extends, it may suggest the drawing of many custom views or intensive processing in onDraw methods.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(141, 248, 149, 0.42)">Light green - Measure/Layout Stage:</span> Represents the amount of time spent in onLayout and onMeasure callbacks in the view hierarchy. A long segment indicates that the view hierarchy is taking a considerable time to process.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(13, 255, 0, 0.42)">Green - Input and Animation Handling:</span> Represents the time taken to evaluate all animators running for that frame and handle all input callbacks. A large segment could indicate that a custom animator or input callback is dedicating too much time to processing. View binding during scrolling, such as RecyclerView.Adapter.onBindViewHolder(), often occurs during this segment and is a more common source of delays in this stage.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(0, 255, 217, 0.42)">Cyan blue - Vertical Sync Delay/Miscellaneous Time:</span> Represents the time the app takes to execute operations between two consecutive frames. It could be an indicator of excessive processing on the UI thread, which could be offloaded to a different thread.</li>
+                  </ul>
+               </p>
+            </div>
             
 
             <h5 class="part-title">Memory Management</h5>
@@ -2070,6 +2114,20 @@ implementation(libs.leakcanary.plumber)
                   </span>
                <p class="text" style="flex:1">Watch Overdrawing E2 Video</p>
             </div>
+            <div class="text-block">
+               <p class="text">
+                  <ul>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 102, 0, 0.42)">Orange - Buffer Swap Stage:</span> Denotes the duration the CPU patiently awaits the GPU to conclude its tasks. An elongated bar implies an overly demanding GPU processing within the application.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 0, 0, 0.42)">Red - Command Issue Stage:</span>Illustrates the time taken by Android's 2D renderer to dispatch commands to OpenGL for the drawing and redrawing of display lists. The bar's height correlates directly with the cumulative time for each execution of a display list (a higher number of display lists results in an extended red bar).</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 179, 255, 0.42)">Light blue - Sync and Load Stage:</span> Reflects the time required to upload bitmap information to the GPU. A prolonged segment indicates that the app invests a significant amount of time in loading a considerable volume of graphics.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 42, 255, 0.42)">Blue - Drawing Stage:</span> Highlights the time used for crafting and refreshing view display lists. If this segment of the bar extends, it may suggest the rendering of numerous custom views or intensive processing in onDraw methods.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(141, 248, 149, 0.42)">Light green - Measure/Layout Stage:</span> Represents the duration spent in onLayout and onMeasure callbacks within the view hierarchy. A lengthy segment signals that the view hierarchy is taking a substantial amount of time to process.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(13, 255, 0, 0.42)">Green - Input and Animation Handling:</span> Depicts the time invested in evaluating all animators running for a given frame and managing all input callbacks. A sizable segment could indicate that a custom animator or input callback is allocating an excessive amount of time to processing. Notably, view binding during scrolling, such as RecyclerView.Adapter.onBindViewHolder(), frequently occurs during this stage and serves as a common source of delays.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(0, 255, 217, 0.42)">Cyan blue - Vertical Sync Delay/Miscellaneous Time:</span> Signifies the time the app consumes to execute operations between two consecutive frames. It could suggest an excess of processing on the UI thread, which could potentially be offloaded to a different thread.</li>
+                  </ul>
+               </p>
+            </div>
+
             
 
             <h5 class="part-title">Memory Management</h5>
@@ -2082,13 +2140,26 @@ implementation(libs.leakcanary.plumber)
                </a>
             </div> 
 
+            <div class="text-block" >
+               <p class="text">The surge in native memory might trigger more frequent garbage collector (GC) calls to free up memory and reclaim unused resources. While GC is essential for memory management, frequent calls can introduce performance overhead, causing intermittent pauses in the application.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">Users might notice occasional stuttering or hiccups in the application's responsiveness, especially during garbage collection events. This can detract from the seamless and smooth user experience that is desirable in any application.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">It is recommended to perform a thorough code review to identify areas where native memory is allocated and deallocated. Also, consider tuning garbage collector settings to strike a balance between reclaiming memory and minimizing the impact on application responsiveness.</p>
+            </div>
+
             <h5 class="part-title">Threading (87)</h5>
             <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
                <a class="spotlight" style="text-align: center;" href="img/part4/nfig9.png" >
                   <img class="img_part_4" src="img/part4/nfig9.png">
                </a>
             </div> 
-
+            
+            <div class="text-block" >
+               <p class="text">In this graph we can observe the methods that used more time in processing. The methods in this case are the choreographer that coordinates the timing of animations, input and drawing, so is understandable that uses more time than the other methods. So although, the app creates a significant number of threads (87) in this specific task, the methods related to the activity are handled efficiently because none of them are taking too much time in CPU processing time.</p>
+            </div>
          
 
             <h5 class="part-title">Energy Consumption</h5>
@@ -2348,7 +2419,20 @@ implementation(libs.leakcanary.plumber)
                <span class="material-symbols-outlined" id="play_e3" onclick="overrideVideo('play_e3','E3_Over.webm')" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
                   arrow_right
                   </span>
-               <p class="text" style="flex:1">Watch Overdrawing E4 Video</p>
+               <p class="text" style="flex:1">Watch Overdrawing E3 Video</p>
+            </div>
+            <div class="text-block">
+               <p class="text">
+                  <ul>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 102, 0, 0.42)">Orange - Buffer Swap Stage:</span> Portrays the time the CPU patiently waits for the GPU to complete its tasks. An extended bar suggests an overly demanding GPU processing within the application.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 0, 0, 0.42)">Red - Command Issue Stage:</span>Depicts the time taken by Android's 2D renderer to dispatch commands to OpenGL for drawing and redrawing display lists. The bar's height correlates directly with the cumulative time for each execution of a display list (a higher number of display lists results in an extended red bar).</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 179, 255, 0.42)">Light blue - Sync and Load Stage:</span> Reflects the time needed to upload bitmap information to the GPU. A prolonged segment indicates that the app takes considerable time to load a significant amount of graphics.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 42, 255, 0.42)">Blue - Drawing Stage:</span> Illustrates the time used to create and update view display lists. If this part of the bar extends, it may suggest the drawing of many custom views or intensive processing in onDraw methods.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(141, 248, 149, 0.42)">Light green - Measure/Layout Stage:</span> Represents the amount of time spent in onLayout and onMeasure callbacks in the view hierarchy. A long segment indicates that the view hierarchy is taking a considerable time to process.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(13, 255, 0, 0.42)">Green - Input and Animation Handling:</span> Represents the time taken to evaluate all animators running for that frame and handle all input callbacks. A large segment could indicate that a custom animator or input callback is dedicating too much time to processing. View binding during scrolling, such as RecyclerView.Adapter.onBindViewHolder(), often occurs during this segment and is a more common source of delays in this stage.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(0, 255, 217, 0.42)">Cyan blue - Vertical Sync Delay/Miscellaneous Time:</span> Signifies the time the app takes to execute operations between two consecutive frames. It could be an indicator of excessive processing on the UI thread, which could be offloaded to a different thread.</li>
+                  </ul>
+               </p>
             </div>
             
 
@@ -2361,6 +2445,16 @@ implementation(libs.leakcanary.plumber)
                   <img class="img_part_4" src="img/part4/nfig13.png">
                </a>
             </div> 
+            <div class="text-block" >
+               <p class="text">The escalated memory usage may push the application closer to memory limits, increasing the likelihood of out-of-memory (OOM) errors. This can result in app crashes, leading to a poor user experience and potential frustration for users.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">High native memory usage often correlates with increased CPU usage, contributing to higher energy consumption. This can lead to accelerated battery drain, negatively affecting the device's battery life.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">Garbage collection introduces CPU overhead as it involves scanning and reclaiming memory. With frequent invocations, the cumulative impact on CPU usage can be substantial, potentially affecting the overall responsiveness of the application.</p>
+            </div>
+
 
             <h5 class="part-title">Threading (60)</h5>
             <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
@@ -2368,6 +2462,10 @@ implementation(libs.leakcanary.plumber)
                   <img class="img_part_4" src="img/part4/nfig14.png">
                </a>
             </div> 
+            <div class="text-block" >
+               <p class="text">In the profiler's findings, some methods stand out for taking more time than in the previous scenario. One of these is the choreographer, which handles tasks like coordinating animations and input. It makes sense that this would take longer, considering its role. Surprisingly, despite using fewer threads (60) for these tasks, the main functions still work efficiently. None of them seem to put too much strain on the CPU, showing smart resource management in the app.</p>
+            </div>
+
 
 
             <h5 class="part-title">Energy Consumption</h5>
@@ -2586,6 +2684,19 @@ implementation(libs.leakcanary.plumber)
                   </span>
                <p class="text" style="flex:1">Watch Overdrawing E4 Video</p>
             </div>
+            <div class="text-block">
+               <p class="text">
+                  <ul>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 102, 0, 0.42)">Orange - Buffer Swap Stage:</span> Indicates the time the CPU awaits the completion of GPU tasks. An extended bar suggests intensive GPU processing within the application.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(255, 0, 0, 0.42)">Red - Command Issue Stage:</span>Illustrates the time Android's 2D renderer takes to dispatch commands to OpenGL for drawing and redrawing display lists. The bar's height correlates directly with the cumulative time for each execution of a display list (a higher number of display lists results in an extended red bar).</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 179, 255, 0.42)">Light blue - Sync and Load Stage:</span> Reflects the time required to upload bitmap information to the GPU. A prolonged segment indicates that the app invests a significant amount of time in loading a considerable volume of graphics.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(0, 42, 255, 0.42)">Blue - Drawing Stage:</span> Highlights the time used for crafting and refreshing view display lists. If this segment of the bar extends, it may suggest the rendering of numerous custom views or intensive processing in onDraw methods.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px;background-color: rgba(141, 248, 149, 0.42)">Light green - Measure/Layout Stage:</span> Represents the duration spent in onLayout and onMeasure callbacks within the view hierarchy. A lengthy segment signals that the view hierarchy is taking a substantial amount of time to process.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(13, 255, 0, 0.42)">Green - Input and Animation Handling:</span> Depicts the time invested in evaluating all animators running for a given frame and managing all input callbacks. A sizable segment could indicate that a custom animator or input callback is allocating an excessive amount of time to processing. Notably, view binding during scrolling, such as RecyclerView.Adapter.onBindViewHolder(), frequently occurs during this stage and serves as a common source of delays.</li>
+                     <li class="text"><span style="padding: 3px; border-radius: 5px; background-color: rgba(0, 255, 217, 0.42)">Cyan blue - Vertical Sync Delay/Miscellaneous Time:</span> Signifies the time the app consumes to execute operations between two consecutive frames. It could suggest an excess of processing on the UI thread, which could potentially be offloaded to a different thread.</li>
+                  </ul>
+               </p>
+            </div>
             
 
             <h5 class="part-title">Memory Management</h5>
@@ -2598,12 +2709,33 @@ implementation(libs.leakcanary.plumber)
                </a>
             </div> 
 
-            <h5 class="part-title">Threading (60)</h5>
+            <div class="text-block" >
+               <p class="text">In the given scenario, a substantial increase in native memory usage has been observed. Such a surge in native memory consumption can have several potential consequences for the application's performance and overall user experience.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">With a significant rise in native memory, the overall performance of the application may suffer. Increased memory usage can lead to slower response times, longer loading durations, and a generally sluggish user interface.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">The excessive use of native memory can lead to resource contention, impacting the ability of the application to efficiently utilize system resources. This contention may extend to other components or processes, causing a ripple effect on the device's overall performance.</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">In addition to the increased native memory usage, the fact that the garbage collector was called five times further emphasizes the memory management challenges faced by the application. Frequent garbage collector invocations can result in the following:</p>
+            </div>
+            <div class="text-block" >
+               <p class="text">The garbage collector temporarily halts the application's execution to identify and collect unused memory. As a consequence, users may experience intermittent pauses or delays during these collection cycles.</p>
+            </div>
+
+
+
+            <h5 class="part-title">Threading (48)</h5>
             <div style="display: flex; align-items: center; width: 100% !important; padding: 10px; flex-direction: column;">
                <a class="spotlight" style="text-align: center;" href="img/part4/nfig19.png" >
                   <img class="img_part_4" src="img/part4/nfig19.png">
                </a>
             </div> 
+            <div class="text-block" >
+               <p class="text">Just like before, some tasks take longer according to the profiler. One of them is the choreographer, which handles animations and input. Even though it uses fewer threads (48) for these jobs, the main functions still work well. None of these tasks seem to stress out the CPU, showing that the app manages resources similarly in different situations.</p>
+            </div>
 
 
             <h5 class="part-title">Energy Consumption</h5>
@@ -2811,8 +2943,8 @@ implementation(libs.leakcanary.plumber)
                <h3>Audit Report</h3>
                <div class="text-block block" data-aos="fade-right" style="display: flex; align-items: center;" >
                   
-                  <p class="text" style="flex:1">Download Audit Report</p>
-                  <span onclick="location.href='files/AR_3.pdf'" class="material-symbols-outlined" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
+                  <p class="text" style="flex:1">Download Audit Report - Part 4</p>
+                  <span onclick="location.href='files/AR_4.pdf'" class="material-symbols-outlined" style="cursor:pointer; background: #40467c; color: white; padding: 4px; border-radius: 30px; margin-right: 10px;">
                      download
                      </span>
                </div>
